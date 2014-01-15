@@ -20,7 +20,7 @@ readDouble = read
 readInt :: String -> Int
 readInt = read
 
--- | Parse the input as RNAzOutput datatype
+-- | Parse the input as RNAplexOutput datatype
 parseRNAplexOutput :: GenParser Char st RNAplexOutput
 parseRNAplexOutput = do
   rnaPlexInteractions <- many1 (try parseRNAplexInteraction)   
