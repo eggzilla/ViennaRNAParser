@@ -30,7 +30,12 @@ source-repository this
 library
   -- Modules exported by the library.
   exposed-modules:   Bio.ViennaRNAParser
- 
+  other-modules:     Bio.RNAfoldData
+                     Bio.RNAfoldParser
+                     Bio.RNAplexData
+                     Bio.RNAplexParser
+                     Bio.RNAzData
+                     Bio.RNAzParser
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.5 && <5, parsec
   

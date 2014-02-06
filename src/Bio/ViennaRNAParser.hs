@@ -7,14 +7,17 @@ module Bio.ViennaRNAParser (
                        module Bio.RNAplexData,
                        module Bio.RNAplexParser,
                        module Bio.RNAzData,
-                       module Bio.RNAzParser
+                       module Bio.RNAzParser,
+                       module Bio.RNAfoldData,
+                       module Bio.RNAfoldParser
                       ) where
-
 import Bio.RNAplexData
 import Bio.RNAplexParser
 import Bio.RNAzData
 import Bio.RNAzParser
 import Bio.RNAfoldData
 import Bio.RNAfoldParser
+
+
 
 
