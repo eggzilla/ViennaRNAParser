@@ -37,7 +37,7 @@ genParserRNAfold = do
   secondaryStructure <- many1 (oneOf "&().,")
   space
   string ("(")
-  foldingEnergy <- many1 (noneOf "\n")
+  foldingEnergy <- many1 (noneOf ")")
   string (")")
   return $ RNAfold sequenceIdentifier sequence secondaryStructure (readDouble foldingEnergy)
 

@@ -15,8 +15,8 @@ data RNAfoldOutput = RNAfoldOutput
 data RNAfold = RNAfold
   { 
     sequenceIdentifier :: String,
-    sequence :: String,
-    secondaryStructure :: String,
+    foldSequence :: String,
+    foldSecondaryStructure :: String,
     foldingEnergy :: Double
   }
   deriving (Show, Eq)

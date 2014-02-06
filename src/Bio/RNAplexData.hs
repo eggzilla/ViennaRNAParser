@@ -16,7 +16,7 @@ data RNAplexInteraction = RNAplexInteraction
   { 
     targetIdentifier :: String,
     queryIdentifier :: String,
-    secondaryStructure :: String,
+    plexSecondaryStructure :: String,
     targetDuplexBegin :: Int,
     targetDuplexEnd :: Int,
     queryDuplexBegin :: Int,
