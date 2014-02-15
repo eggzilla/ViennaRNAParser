@@ -11,7 +11,9 @@ module Bio.ViennaRNAParser (
                        module Bio.RNAfoldData,
                        module Bio.RNAfoldParser,
                        module Bio.RNAalifoldData,
-                       module Bio.RNAalifoldParser
+                       module Bio.RNAalifoldParser,
+                       module Bio.RNAdistanceData,
+                       module Bio.RNAdistanceParser
                       ) where
 import Bio.RNAplexData
 import Bio.RNAplexParser
@@ -21,5 +23,7 @@ import Bio.RNAfoldData
 import Bio.RNAfoldParser
 import Bio.RNAalifoldData
 import Bio.RNAalifoldParser
+import Bio.RNAdistanceData
+import Bio.RNAdistanceParser
 
 
