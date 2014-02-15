@@ -1,7 +1,7 @@
 {-# LANGUAGE Arrows #-}
 
 -- | Parse RNAz output
---   For more information on RNAz consult: <http://www.tbi.univie.ac.at/~wash/RN 
+--   For more information on RNAz consult: <http://www.tbi.univie.ac.at/~wash/RNAz
 module Bio.RNAzParser (
                        parseRNAz,
                        readRNAz,                                   
@@ -111,9 +111,9 @@ parseRNAzResult = do
   zscore <- many1 (noneOf ",")
   char ','
   space
-  char 'R'
+  zScoreCalculationApproach <- choice [char 'S', char 'R'] --oneOf "RS"
   char (')')
-  return $ RNAzResult header resultSequence dotBracket (readDouble mfe) (readDouble zscore)
+  return $ RNAzResult header resultSequence dotBracket (readDouble mfe) (readDouble zscore) zScoreCalculationApproach
 
 -- | Parse the consenus of RNAz results         
 parseRNAzConsensus :: GenParser Char st RNAzConsensus

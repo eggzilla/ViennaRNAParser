@@ -37,7 +37,9 @@ data RNAzResult = RNAzResult
     resultSequence :: String,
     dotBracket :: String,         
     minimumFreeEnergy :: Double,
-    zScore :: Double
+    zScore :: Double,
+    --S = huffling, R = regression
+    zscoreCalculationApproach :: Char
   }
   deriving (Show, Eq)
 
