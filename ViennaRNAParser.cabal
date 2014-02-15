@@ -36,6 +36,8 @@ library
                      Bio.RNAplexParser
                      Bio.RNAzData
                      Bio.RNAzParser
+                     Bio.RNAalifoldData
+                     Bio.RNAalifoldParser
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.5 && <5, parsec
   
