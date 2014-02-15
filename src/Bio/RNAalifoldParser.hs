@@ -3,7 +3,7 @@
 
 module Bio.RNAalifoldParser (
                        parseRNAalifold,
-                       readRNAalifold,                                   
+                       readRNAalifold,                                 
                        module Bio.RNAalifoldData
                       ) where
 
@@ -35,9 +35,8 @@ genParserRNAalifold = do
   covarianceContributionEnergy <- many1 (noneOf ")")
   string (")")
   many1 space
-  newline
+  eof
   return $ RNAalifoldOutput sequence secondaryStructure (readDouble foldingEnergy) (readDouble initialFoldingEnergy) (readDouble covarianceContributionEnergy)   
-
 -- | parse RNAalifold output from input string
 parseRNAalifold input = parse genParserRNAalifold "genParseRNAalifold" input
 
