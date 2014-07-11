@@ -95,7 +95,7 @@ parseRNAzResult = do
   space
   header <- many1 (noneOf "\n")
   many1 space
-  resultSequence <- many1 (oneOf "-ATUGCatugc")         
+  resultSequence <- many1 (oneOf "~-ATUGCatugc")         
   newline        
   dotBracket <- many1 (oneOf "-().,")
   space
@@ -121,7 +121,7 @@ parseRNAzConsensus = do
   space
   string (">consensus")
   many1 space
-  consensusSequence <- many1 (oneOf "_-ATUGCatugc")                 
+  consensusSequence <- many1 (oneOf "~_-ATUGCatugc")                 
   newline          
   dotBracket <- many1 (oneOf "().,")
   space
