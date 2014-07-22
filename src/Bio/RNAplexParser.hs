@@ -20,14 +20,14 @@ readDouble = read
 readInt :: String -> Int
 readInt = read
 
--- | Parse the input as RNAplexOutput datatype
-parseRNAplexOutput :: GenParser Char st RNAplexOutput
+-- | Parse the input as list of RNAplexInteraction datatype
+parseRNAplexOutput :: GenParser Char st [RNAplexInteraction]
 parseRNAplexOutput = do
   rnaPlexInteractions <- many1 (try parseRNAplexInteraction)   
   eof  
-  return $ RNAplexOutput rnaPlexInteractions
+  return $ rnaPlexInteractions
 
--- | Parse the consenus of RNAz results         
+-- | Parse the consenus of RNAplex results         
 parseRNAplexInteraction :: GenParser Char st RNAplexInteraction
 parseRNAplexInteraction = do
   string (">") 
@@ -54,22 +54,22 @@ parseRNAplexInteraction = do
   optional space
   optional (char '=')
   optional space
-  duplexEnergyWithoutAccessiblity <- optionMaybe (many1 (noneOf (" ")))
+  duplexEnergyWithoutAccessiblity <- optionMaybe (try (many1 (noneOf (" )"))))
   optional space 
   optional (char '+')
   optional (many1 space)
-  queryAccessiblity <- optionMaybe (many1 (noneOf (" "))) 
+  queryAccessiblity <- optionMaybe (try (many1 (noneOf (" )")))) 
   optional space 
   optional (char '+')
   optional (many1 space)
-  targetAccessibility <- optionMaybe (many1 (noneOf (")"))) 
+  targetAccessibility <- optionMaybe (try (many1 (noneOf (")"))))
   char ')'
-  newline 
+  newline
   return $ RNAplexInteraction targetIdentifier queryIdentifier secondaryStructure (readInt targetDuplexBegin) (readInt targetDuplexEnd) (readInt queryDuplexBegin) (readInt queryDuplexEnd) (readDouble duplexEnergy) (liftM readDouble duplexEnergyWithoutAccessiblity) (liftM readDouble queryAccessiblity) (liftM readDouble targetAccessibility)
 
 -- | parse RNAplexOutput from input string
 parseRNAplex input = parse parseRNAplexOutput "parseRNAplexOutput" input
 
 -- | parse from input filePath                      
-readRNAplex :: String -> IO (Either ParseError RNAplexOutput)                  
+readRNAplex :: String -> IO (Either ParseError [RNAplexInteraction])                  
 readRNAplex filePath = parseFromFile parseRNAplexOutput filePath

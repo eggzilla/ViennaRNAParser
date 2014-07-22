@@ -4,13 +4,6 @@
 
 module Bio.RNAplexData where
     
--- | RNAplex output consists of a set of interactions 
-data RNAplexOutput = RNAplexOutput
-  {
-    plexInteractions :: [RNAplexInteraction]
-  }
-  deriving (Show, Eq)
-
 -- | Data structure for individual interaction between a target and query nucleic acid seqence
 data RNAplexInteraction = RNAplexInteraction
   { 
