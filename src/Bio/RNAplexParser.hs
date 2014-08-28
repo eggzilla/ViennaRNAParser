@@ -43,7 +43,6 @@ parseRNAplexInteraction = do
   targetDuplexEnd <- many1 digit
   many1 space
   char ':'
-  space
   many1 space
   queryDuplexBegin <- many1 digit
   char ','
