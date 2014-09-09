@@ -5,14 +5,14 @@ name:                ViennaRNAParser
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.0.1
+version:             1.0.0
 synopsis:            Libary for parsing ViennaRNA package output
 description:         Currently contains parsers and datatypes for: RNAplex, RNAz. The libary is tested with Version >2.0 of the ViennaRNA package.
                      
 license:             GPL
 license-file:        LICENSE
 author:              Florian Eggenhofer
-maintainer:          egg@tbi.univie.ac.at
+maintainer:          florian.eggenhofer@univie.ac.at
 -- copyright:           
 category:            Bioinformatics
 build-type:          Simple
@@ -24,8 +24,8 @@ source-repository head
 
 source-repository this
   type:     git
-  location: https://github.com/eggzilla/ViennaRNAParser/tree/v0.0.1
-  tag:      v0.0.1
+  location: https://github.com/eggzilla/ViennaRNAParser/tree/1.0.0
+  tag:      1.0.0
 
 library
   -- Modules exported by the library.
@@ -40,6 +40,8 @@ library
                      Bio.RNAalifoldParser
                      Bio.RNAdistanceData
                      Bio.RNAdistanceParser
+                     Bio.RNAupData
+                     Bio.RNAupParser
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.5 && <5, parsec
   
