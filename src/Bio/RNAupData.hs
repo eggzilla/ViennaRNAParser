@@ -9,23 +9,25 @@ data RNAupInteraction = RNAupInteraction
   { 
     upQueryIdentifier :: String,
     upTargetIdentifier :: String,
-    upSecondaryStructure :: String,
-    upOutputFileName :: String,
     --first interaction region is minimum free energy interaction
     upInteractions :: [RNAupInteractionRegion]
   }
   deriving (Show, Eq)
 
--- | Data structure for (sub-) optimal interaction region
+-- | Data structure for (sub-) optimal interaction region 
 data RNAupInteractionRegion = RNAupInteractionRegion
  {
-  upTargetDuplexBegin :: Int,
-  upTargetDuplexEnd :: Int,
+  upSecondaryStructure :: String,
   upQueryDuplexBegin :: Int,
   upQueryDuplexEnd :: Int,
+  upTargetDuplexBegin :: Int,
+  upTargetDuplexEnd :: Int,
   upDuplexEnergy :: Double,
   upDuplexEnergyWithoutAccessiblity :: Maybe Double,
   upQueryAccessiblity :: Maybe Double,
-  upTargetAccessibility :: Maybe Double
+  upTargetAccessibility :: Maybe Double,
+  upQuerySequence :: String,
+  upTargetSequence :: String,
+  upOutputFileName :: String
  }
  deriving (Show, Eq)

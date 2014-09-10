@@ -1,4 +1,4 @@
--- | Parse RNAup output
+-- | Parse RNAup interaction_first output
 --   For more information on RNAup consult: <http://www.tbi.univie.ac.at/RNA/RNAup.html>
 
 module Bio.RNAupParser (
@@ -20,50 +20,62 @@ readInt :: String -> Int
 readInt = read
 
 -- | Parse the input as list of RNAupInteraction datatype
-parseRNAupOutput :: GenParser Char st [RNAplexInteraction]
+parseRNAupOutput :: GenParser Char st [RNAupInteraction]
 parseRNAupOutput = do
-  rnaUpInteractions <- many1 (try parseRNAplexInteraction)   
+  string (">")
+  queryIdentifier <- many1 (noneOf "\n")
+  newline
+  rnaUpInteractions <- many1 (try (parseRNAupInteraction queryIdentifier))   
   eof  
   return $ rnaUpInteractions
 
 -- | Parse the consenus of RNAup results         
-parseRNAupInteraction :: GenParser Char st RNAupInteraction
-parseRNAupInteraction = do
+parseRNAupInteraction :: String -> GenParser Char st RNAupInteraction
+parseRNAupInteraction queryIdentifier = do
   string (">") 
   targetIdentifier <- many1 (noneOf "\n")                
   newline
-  string (">") 
-  queryIdentifier <- many1 (noneOf "\n")                
-  newline 
-  secondaryStructure <- many1 (oneOf "&().,")
+  rnaupInteractionRegions <- many1 (try parseRNAupInteractionRegion)
+  return $ RNAupInteraction queryIdentifier targetIdentifier rnaupInteractionRegions
+
+-- | Parse a RNAupInteractionRegion
+parseRNAupInteractionRegion :: GenParser Char st RNAupInteractionRegion
+parseRNAupInteractionRegion = do
+  upsecondaryStructure <- many1 (oneOf "&().,")
   many1 space
-  targetDuplexBegin <- many1 digit
+  uptargetDuplexBegin <- many1 digit
   char ','
-  targetDuplexEnd <- many1 digit
+  uptargetDuplexEnd <- many1 digit
   many1 space
   char ':'
   many1 space
-  queryDuplexBegin <- many1 digit
+  upqueryDuplexBegin <- many1 digit
   char ','
-  queryDuplexEnd <- many1 digit
+  upqueryDuplexEnd <- many1 digit
   many1 space
   char '('
-  duplexEnergy <- many1 (noneOf (" )"))
+  upduplexEnergy <- many1 (noneOf (" )"))
   optional space
   optional (char '=')
   optional space
-  duplexEnergyWithoutAccessiblity <- optionMaybe (try (many1 (noneOf (" )"))))
+  upduplexEnergyWithoutAccessiblity <- optionMaybe (try (many1 (noneOf (" )"))))
   optional space 
   optional (char '+')
   optional (many1 space)
-  queryAccessiblity <- optionMaybe (try (many1 (noneOf (" )")))) 
+  upqueryAccessiblity <- optionMaybe (try (many1 (noneOf (" )")))) 
   optional space 
   optional (char '+')
   optional (many1 space)
-  targetAccessibility <- optionMaybe (try (many1 (noneOf (")"))))
+  uptargetAccessibility <- optionMaybe (try (many1 (noneOf (")"))))
   char ')'
   newline
-  return $ RNAupInteraction targetIdentifier queryIdentifier secondaryStructure (readInt targetDuplexBegin) (readInt targetDuplexEnd) (readInt queryDuplexBegin) (readInt queryDuplexEnd) (readDouble duplexEnergy) (liftM readDouble duplexEnergyWithoutAccessiblity) (liftM readDouble queryAccessiblity) (liftM readDouble targetAccessibility)
+  querySequence <- many1 (noneOf ("&"))
+  char '&'
+  targetSequence <- many1 (noneOf ("\n"))
+  newline
+  upOutputFileName <- many1 (noneOf ("\n"))
+  newline
+  return $ RNAupInteractionRegion upsecondaryStructure (readInt uptargetDuplexBegin) (readInt uptargetDuplexEnd) (readInt upqueryDuplexBegin) (readInt upqueryDuplexEnd) (readDouble upduplexEnergy) (liftM readDouble upduplexEnergyWithoutAccessiblity) (liftM readDouble upqueryAccessiblity) (liftM readDouble uptargetAccessibility) querySequence targetSequence upOutputFileName
 
 -- | parse RNAupOutput from input string
 parseRNAup input = parse parseRNAupOutput "parseRNAupOutput" input
