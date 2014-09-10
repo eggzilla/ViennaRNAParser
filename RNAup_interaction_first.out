@@ -1,0 +1,144 @@
+>sequence1
+>sequence2
+(((((((((((((..((((((((&))))))))..)))))))))))))  30,52  :  22,44  (-17.63 = -27.09 + 4.74 + 4.72)
+GAAAUUCGUUACAAGGGGAAAUC&GAUUUCCUGGUGUAACGAAUUUU
+RNAup output in file: sequence2_sequence1_w25_u1.out
+(((((..(((((&)))))..)))))  22,33  :  30,41  (-5.37 = -7.34 + 1.95 + 0.01)
+UGCAUUUUGAAA&UUUUAUUGUGCA
+RNAup output in file: RNA_w25_u1.out
+>sequence3
+((((&))))   1,4   :   1,4   (-7.87 = -8.30 + 0.21 + 0.21)
+CCGG&CCGG
+RNAup output in file: sequence3_sequence1_w25_u1.out
+(((((&)))))  62,66  :   7,11  (-5.83 = -9.10 + 1.91 + 1.36)
+GCUGC&GCAGC
+RNAup output in file: RNA_w25_u1.out
+((((((&))))))  51,56  :  50,55  (-4.01 = -8.50 + 0.25 + 4.24)
+UCCGUA&UGCGGA
+RNAup output in file: RNA_w25_u1.out
+.........................&.......................  29,53  :  37,59  (-8.82 = -16.15 + 4.87 + 2.46)
+UGAAAUUCGUUACAAGGGGAAAUCC&GGAACCCAGUGAUAACGAUUUGG
+RNAup output in file: RNA_w25_u1.out
+((((((((((((((&))).)))))))))))  10,23  :  22,36  (-7.61 = -18.15 + 2.88 + 7.66)
+GUUCAACACGCUUG&CAGCGUGUGUUGGAC
+RNAup output in file: RNA_w25_u1.out
+(((((.(((&)))..)))))  16,24  :  45,54  (-4.90 = -11.82 + 1.20 + 5.72)
+CACGCUUGC&GCACUGCGUG
+RNAup output in file: RNA_w25_u1.out
+(((.((((&)))))))   2,9   :  64,70  (-5.99 = -7.03 + 0.81 + 0.23)
+CGGAACCA&UGGUCUG
+RNAup output in file: RNA_w25_u1.out
+(((((((&)))))))  62,68  :  44,50  (-7.22 = -10.50 + 1.96 + 1.32)
+GCUGCGU&GCGCGGU
+RNAup output in file: RNA_w25_u1.out
+((((((((&))))).)))   2,9   :   2,10  (-5.10 = -11.19 + 0.81 + 5.29)
+CGGAACCA&UGGUUUCCG
+RNAup output in file: RNA_w25_u1.out
+((((((&))))))   8,13  :  38,43  (-2.21 = -8.20 + 0.88 + 5.12)
+CAGUUC&GAGCUG
+RNAup output in file: RNA_w25_u1.out
+(((.(....(((((&)))))....).)))   1,14  :  21,34  (-4.82 = -10.80 + 0.95 + 5.04)
+CCGGAACCAGUUCA&UGAACCAAGUGCGG
+RNAup output in file: RNA_w25_u1.out
+(((((((&))).))))  62,68  :   1,8   (-6.18 = -8.53 + 1.96 + 0.39)
+GCUGCGU&ACGUCAGC
+RNAup output in file: RNA_w25_u1.out
+((((.(((.((((&)))))))))))   1,13  :  37,47  (-5.07 = -16.34 + 0.94 + 10.33)
+CCGGAACCAGUUC&GAACGGUCCGG
+RNAup output in file: RNA_w25_u1.out
+....................&......................   2,21  :  47,68  (-8.06 = -18.43 + 2.93 + 7.44)
+CGGAACCAGUUCAACACGCU&AGCGUGAAGUGCUGGCACGUCG
+RNAup output in file: RNA_w25_u1.out
+((((((...(((((((((((((.&.))))))))).)))).))))))   7,29  :  34,55  (-9.77 = -21.59 + 2.99 + 8.83)
+CCAGUUCAACACGCUUGCAUUUU&AAGAUGUAGGUCGUGAAAUUGG
+RNAup output in file: RNA_w25_u1.out
+(((.((((((.&.)))))))))  59,69  :  52,61  (-5.10 = -16.90 + 2.36 + 9.45)
+CCCGCUGCGUU&AACGCAGGGG
+RNAup output in file: RNA_w25_u1.out
+...........&...........   1,11  :   6,16  (-7.85 = -11.84 + 0.92 + 3.07)
+CCGGAACCAGU&GCUGUUCCGCG
+RNAup output in file: RNA_w25_u1.out
+((.(.(((((&))))).).))  59,68  :  61,70  (-5.22 = -8.24 + 2.36 + 0.66)
+CCCGCUGCGU&ACGCACCAGG
+RNAup output in file: RNA_w25_u1.out
+(((((&)))))   1,5   :  11,15  (-5.65 = -9.00 + 0.56 + 2.79)
+CCGGA&UCCGG
+RNAup output in file: RNA_w25_u1.out
+.((((((((((.(.&.).)).)))))))).  56,69  :   6,20  (-11.28 = -14.26 + 2.38 + 0.60)
+AAACCCGCUGCGUU&AAGGUUGGUGGGUUU
+RNAup output in file: RNA_w25_u1.out
+>sequence4
+(((((((((((((..((((((((&))))))))..)))))))))))))  30,52  :  22,44  (-17.63 = -27.09 + 4.74 + 4.72)
+GAAAUUCGUUACAAGGGGAAAUC&GAUUUCCUGGUGUAACGAAUUUU
+RNAup output in file: sequence4_sequence1_w25_u1.out
+(((((..(((((&)))))..)))))  22,33  :  30,41  (-5.37 = -7.34 + 1.95 + 0.01)
+UGCAUUUUGAAA&UUUUAUUGUGCA
+RNAup output in file: RNA_w25_u1.out
+>sequence5
+((((&))))   1,4   :   1,4   (-7.87 = -8.30 + 0.21 + 0.21)
+CCGG&CCGG
+RNAup output in file: sequence5_sequence1_w25_u1.out
+(((((&)))))  62,66  :   7,11  (-5.83 = -9.10 + 1.91 + 1.36)
+GCUGC&GCAGC
+RNAup output in file: RNA_w25_u1.out
+((((((&))))))  51,56  :  50,55  (-4.01 = -8.50 + 0.25 + 4.24)
+UCCGUA&UGCGGA
+RNAup output in file: RNA_w25_u1.out
+.........................&.......................  29,53  :  37,59  (-8.82 = -16.15 + 4.87 + 2.46)
+UGAAAUUCGUUACAAGGGGAAAUCC&GGAACCCAGUGAUAACGAUUUGG
+RNAup output in file: RNA_w25_u1.out
+((((((((((((((&))).)))))))))))  10,23  :  22,36  (-7.61 = -18.15 + 2.88 + 7.66)
+GUUCAACACGCUUG&CAGCGUGUGUUGGAC
+RNAup output in file: RNA_w25_u1.out
+(((((.(((&)))..)))))  16,24  :  45,54  (-4.90 = -11.82 + 1.20 + 5.72)
+CACGCUUGC&GCACUGCGUG
+RNAup output in file: RNA_w25_u1.out
+(((.((((&)))))))   2,9   :  64,70  (-5.99 = -7.03 + 0.81 + 0.23)
+CGGAACCA&UGGUCUG
+RNAup output in file: RNA_w25_u1.out
+(((((((&)))))))  62,68  :  44,50  (-7.22 = -10.50 + 1.96 + 1.32)
+GCUGCGU&GCGCGGU
+RNAup output in file: RNA_w25_u1.out
+((((((((&))))).)))   2,9   :   2,10  (-5.10 = -11.19 + 0.81 + 5.29)
+CGGAACCA&UGGUUUCCG
+RNAup output in file: RNA_w25_u1.out
+((((((&))))))   8,13  :  38,43  (-2.21 = -8.20 + 0.88 + 5.12)
+CAGUUC&GAGCUG
+RNAup output in file: RNA_w25_u1.out
+(((.(....(((((&)))))....).)))   1,14  :  21,34  (-4.82 = -10.80 + 0.95 + 5.04)
+CCGGAACCAGUUCA&UGAACCAAGUGCGG
+RNAup output in file: RNA_w25_u1.out
+(((((((&))).))))  62,68  :   1,8   (-6.18 = -8.53 + 1.96 + 0.39)
+GCUGCGU&ACGUCAGC
+RNAup output in file: RNA_w25_u1.out
+((((.(((.((((&)))))))))))   1,13  :  37,47  (-5.07 = -16.34 + 0.94 + 10.33)
+CCGGAACCAGUUC&GAACGGUCCGG
+RNAup output in file: RNA_w25_u1.out
+....................&......................   2,21  :  47,68  (-8.06 = -18.43 + 2.93 + 7.44)
+CGGAACCAGUUCAACACGCU&AGCGUGAAGUGCUGGCACGUCG
+RNAup output in file: RNA_w25_u1.out
+((((((...(((((((((((((.&.))))))))).)))).))))))   7,29  :  34,55  (-9.77 = -21.59 + 2.99 + 8.83)
+CCAGUUCAACACGCUUGCAUUUU&AAGAUGUAGGUCGUGAAAUUGG
+RNAup output in file: RNA_w25_u1.out
+(((.((((((.&.)))))))))  59,69  :  52,61  (-5.10 = -16.90 + 2.36 + 9.45)
+CCCGCUGCGUU&AACGCAGGGG
+RNAup output in file: RNA_w25_u1.out
+...........&...........   1,11  :   6,16  (-7.85 = -11.84 + 0.92 + 3.07)
+CCGGAACCAGU&GCUGUUCCGCG
+RNAup output in file: RNA_w25_u1.out
+((.(.(((((&))))).).))  59,68  :  61,70  (-5.22 = -8.24 + 2.36 + 0.66)
+CCCGCUGCGU&ACGCACCAGG
+RNAup output in file: RNA_w25_u1.out
+(((((&)))))   1,5   :  11,15  (-5.65 = -9.00 + 0.56 + 2.79)
+CCGGA&UCCGG
+RNAup output in file: RNA_w25_u1.out
+.((((((((((.(.&.).)).)))))))).  56,69  :   6,20  (-11.28 = -14.26 + 2.38 + 0.60)
+AAACCCGCUGCGUU&AAGGUUGGUGGGUUU
+RNAup output in file: RNA_w25_u1.out
+>sequence6
+(((((((((((((..((((((((&))))))))..)))))))))))))  30,52  :  22,44  (-17.63 = -27.09 + 4.74 + 4.72)
+GAAAUUCGUUACAAGGGGAAAUC&GAUUUCCUGGUGUAACGAAUUUU
+RNAup output in file: sequence6_sequence1_w25_u1.out
+(((((..(((((&)))))..)))))  22,33  :  30,41  (-5.37 = -7.34 + 1.95 + 0.01)
+UGCAUUUUGAAA&UUUUAUUGUGCA
+RNAup output in file: RNA_w25_u1.out
