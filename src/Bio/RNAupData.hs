@@ -5,18 +5,20 @@
 module Bio.RNAupData where
     
 -- | Data structure for individual interaction between a target and query nucleic acid seqence, contains all (sub)-optimal interactions 
-data RNAupInteractions = RNAupInteractions
+data RNAupInteraction = RNAupInteraction
   { 
-    upTargetIdentifier :: String,
     upQueryIdentifier :: String,
+    upTargetIdentifier :: String,
     upSecondaryStructure :: String,
     upOutputFileName :: String,
-    upInteractions :: [RNAupInteraction]
+    --first interaction region is minimum free energy interaction
+    upInteractions :: [RNAupInteractionRegion]
   }
   deriving (Show, Eq)
 
--- | Data structure for (sub-optimal Interactions)
-data RNAupInteraction = RNAupInteraction{
+-- | Data structure for (sub-) optimal interaction region
+data RNAupInteractionRegion = RNAupInteractionRegion
+ {
   upTargetDuplexBegin :: Int,
   upTargetDuplexEnd :: Int,
   upQueryDuplexBegin :: Int,
@@ -25,4 +27,5 @@ data RNAupInteraction = RNAupInteraction{
   upDuplexEnergyWithoutAccessiblity :: Maybe Double,
   upQueryAccessiblity :: Maybe Double,
   upTargetAccessibility :: Maybe Double
-}
+ }
+ deriving (Show, Eq)

@@ -25,5 +25,7 @@ import Bio.RNAalifoldData
 import Bio.RNAalifoldParser
 import Bio.RNAdistanceData
 import Bio.RNAdistanceParser
+import Bio.RNAupData
+import Bio.RNAupParser
 
 
