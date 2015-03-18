@@ -20,6 +20,6 @@ main = do
   args <- getArgs
   let input_file = (head args)
   putStrLn "Test:"
-  parsedinput <- readRNAup input_file  
+  parsedinput <- readRNAz input_file  
   print parsedinput
 

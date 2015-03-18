@@ -44,7 +44,7 @@ library
                      Bio.RNAupParser
 
   -- compiler-options:
-  ghc-options:         -Wall -O2
+  ghc-options:         -Wall -O2 -fno-warn-unused-do-bind
 
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.5 && <5, parsec

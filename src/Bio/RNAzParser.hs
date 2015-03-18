@@ -11,9 +11,9 @@ module Bio.RNAzParser (
 import Bio.RNAzData
 --import Biobase.RNA
 import Text.ParserCombinators.Parsec
-import Text.ParserCombinators.Parsec.Token
-import Text.ParserCombinators.Parsec.Language (emptyDef)    
-import Control.Monad
+--import Text.ParserCombinators.Parsec.Token
+--import Text.ParserCombinators.Parsec.Language (emptyDef)    
+--import Control.Monad
 
 readDouble :: String -> Double
 readDouble = read              
@@ -28,36 +28,37 @@ parseRNAzOutput = do
   many1 (oneOf "# ")
   string "RNAz"
   space
-  version <- many1 (noneOf " ")
+  _version <- many1 (noneOf " ")
   space
   space
   many1 (char '#')
   newline  
   space
-  sequences <- parseRNAzIntField "Sequences:"
-  columns <- parseRNAzIntField "Columns:"
-  readingDirection <- parseRNAzStringField "Reading direction:"
-  meanPairwiseIdentity <- parseRNAzDoubleField "Mean pairwise identity:"
-  shannonEntropy <- parseRNAzDoubleField "Shannon entropy:" 
-  gcContent <- parseRNAzDoubleField "G+C content:"
-  meanSingleSequenceMFE <- parseRNAzDoubleField "Mean single sequence MFE:"
-  consensusMFE <- parseRNAzDoubleField "Consensus MFE:"
-  energyContribution <- parseRNAzDoubleField "Energy contribution:"
-  covarianceContribution <- parseRNAzDoubleField "Covariance contribution:"
-  combinationsPair <- parseRNAzDoubleField "Combinations/Pair:"
-  meanZScore <- parseRNAzDoubleField "Mean z-score:"
-  structureConservationIndex <- parseRNAzDoubleField "Structure conservation index:"
-  backgroundModel <- parseRNAzStringField "Background model:"
-  decisionModel <- parseRNAzStringField "Decision model:"
-  svmDecisionValue <-  parseRNAzDoubleField "SVM decision value:"
-  svmRNAClassProbability <- parseRNAzDoubleField "SVM RNA-class probability:"
-  prediction <- parseRNAzStringField "Prediction:"
-  space
-  many1 (char '#')
+  _sequences <- parseRNAzIntField "Sequences:"
+  _columns <- parseRNAzIntField "Columns:"
+  _readingDirection <- parseRNAzStringField "Reading direction:"
+  _meanPairwiseIdentity <- parseRNAzDoubleField "Mean pairwise identity:"
+  _shannonEntropy <- parseRNAzDoubleField "Shannon entropy:" 
+  _gcContent <- parseRNAzDoubleField "G+C content:"
+  _meanSingleSequenceMFE <- parseRNAzDoubleField "Mean single sequence MFE:"
+  _consensusMFE <- parseRNAzDoubleField "Consensus MFE:"
+  _energyContribution <- parseRNAzDoubleField "Energy contribution:"
+  _covarianceContribution <- parseRNAzDoubleField "Covariance contribution:"
+  _combinationsPair <- parseRNAzDoubleField "Combinations/Pair:"
+  _meanZScore <- parseRNAzDoubleField "Mean z-score:"
+  _structureConservationIndex <- parseRNAzDoubleField "Structure conservation index:"
+  _backgroundModel <- parseRNAzStringField "Background model:"
+  _decisionModel <- parseRNAzStringField "Decision model:"
+  _svmDecisionValue <-  parseRNAzDoubleField "SVM decision value:"
+  _svmRNAClassProbability <- parseRNAzDoubleField "SVM RNA-class probability:"
+  _prediction <- parseRNAzStringField "Prediction:"
   newline
-  rnaZResults  <- many1 (try parseRNAzResult)
-  rnaZConsensus <- parseRNAzConsensus         
-  return $ RNAzOutput version sequences columns readingDirection meanPairwiseIdentity shannonEntropy gcContent meanSingleSequenceMFE consensusMFE energyContribution covarianceContribution combinationsPair meanZScore structureConservationIndex  backgroundModel decisionModel svmDecisionValue svmRNAClassProbability prediction rnaZResults rnaZConsensus
+  many1 (char '#') 
+  newline
+  newline
+  _rnaZResults  <- many1 (try parseRNAzResult)
+  _rnaZConsensus <- parseRNAzConsensus         
+  return $ RNAzOutput _version _sequences _columns _readingDirection _meanPairwiseIdentity _shannonEntropy _gcContent _meanSingleSequenceMFE _consensusMFE _energyContribution _covarianceContribution _combinationsPair _meanZScore _structureConservationIndex _backgroundModel _decisionModel _svmDecisionValue _svmRNAClassProbability _prediction _rnaZResults _rnaZConsensus
 
 -- | Parse a RNAz field containing a Double 
 parseRNAzDoubleField :: String -> GenParser Char st Double
@@ -75,9 +76,9 @@ parseRNAzStringField fieldname = do
   optional space
   string fieldname
   space
-  string <- many1 (noneOf "\n")
+  stringField <- many1 (noneOf "\n")
   space
-  return $ string          
+  return $ stringField          
 
 -- | Parse a RNAz field containing a Int          
 parseRNAzIntField :: String -> GenParser Char st Int
@@ -92,36 +93,36 @@ parseRNAzIntField fieldname = do
 -- | Parse a RNAz result        
 parseRNAzResult :: GenParser Char st RNAzResult
 parseRNAzResult = do
-  space
-  header <- many1 (noneOf "\n")
-  many1 space
-  resultSequence <- many1 (oneOf "~-ATUGCatugc")         
+  _header <- many1 (noneOf "\n")
+  newline 
+  notFollowedBy (string (">consensus"))
+  _resultSequence <- many1 (oneOf "~-NATUGCatugc")         
   newline        
-  dotBracket <- many1 (oneOf "-().,")
+  _dotBracket <- many1 (oneOf "-().,")
   space
   char ('(')
   space
-  mfe <- many1 (noneOf ",")
+  _mfe <- many1 (noneOf ",")
   char ','
   space
   string ("z-score")
   space
   char '='
   space
-  zscore <- many1 (noneOf ",")
+  _zscore <- many1 (noneOf ",")
   char ','
   space
-  zScoreCalculationApproach <- choice [char 'S', char 'R'] --oneOf "RS"
+  _zScoreCalculationApproach <- choice [char 'S', char 'R'] --oneOf "RS"
   char (')')
-  return $ RNAzResult header resultSequence dotBracket (readDouble mfe) (readDouble zscore) zScoreCalculationApproach
+  newline
+  return $ RNAzResult _header _resultSequence _dotBracket (readDouble _mfe) (readDouble _zscore) _zScoreCalculationApproach
 
 -- | Parse the consenus of RNAz results         
 parseRNAzConsensus :: GenParser Char st RNAzConsensus
 parseRNAzConsensus = do
-  space
   string (">consensus")
-  many1 space
-  consensusSequence <- many1 (oneOf "~_-ATUGCatugc")                 
+  newline
+  consensusSequence <- many1 (oneOf "~_-NATUGCatugc")                 
   newline          
   dotBracket <- many1 (oneOf "().,")
   space
@@ -144,6 +145,7 @@ parseRNAzConsensus = do
   return $ RNAzConsensus consensusSequence dotBracket
          
 -- | parse RNAzOutput from input string
+parseRNAz :: [Char] -> Either ParseError RNAzOutput
 parseRNAz input = parse parseRNAzOutput "parseRNAzOutput" input
 
 -- | parse from input filePath                      
