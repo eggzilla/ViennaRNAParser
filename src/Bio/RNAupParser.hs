@@ -8,9 +8,7 @@ module Bio.RNAupParser (
                       ) where
 
 import Bio.RNAupData
-import Text.ParserCombinators.Parsec
-import Text.ParserCombinators.Parsec.Token
-import Text.ParserCombinators.Parsec.Language (emptyDef)    
+import Text.ParserCombinators.Parsec    
 import Control.Monad
 
 readDouble :: String -> Double
@@ -73,11 +71,12 @@ parseRNAupInteractionRegion = do
   char '&'
   targetSequence <- many1 (noneOf ("\n"))
   newline
-  upOutputFileName <- many1 (noneOf ("\n"))
+  _upOutputFileName <- many1 (noneOf ("\n"))
   newline
-  return $ RNAupInteractionRegion upsecondaryStructure (readInt uptargetDuplexBegin) (readInt uptargetDuplexEnd) (readInt upqueryDuplexBegin) (readInt upqueryDuplexEnd) (readDouble upduplexEnergy) (liftM readDouble upduplexEnergyWithoutAccessiblity) (liftM readDouble upqueryAccessiblity) (liftM readDouble uptargetAccessibility) querySequence targetSequence upOutputFileName
+  return $ RNAupInteractionRegion upsecondaryStructure (readInt uptargetDuplexBegin) (readInt uptargetDuplexEnd) (readInt upqueryDuplexBegin) (readInt upqueryDuplexEnd) (readDouble upduplexEnergy) (liftM readDouble upduplexEnergyWithoutAccessiblity) (liftM readDouble upqueryAccessiblity) (liftM readDouble uptargetAccessibility) querySequence targetSequence _upOutputFileName
 
 -- | parse RNAupOutput from input string
+parseRNAup :: [Char] -> Either ParseError [RNAupInteraction]
 parseRNAup input = parse parseRNAupOutput "parseRNAupOutput" input
 
 -- | parse from input filePath                      

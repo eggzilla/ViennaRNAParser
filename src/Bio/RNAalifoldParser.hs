@@ -9,20 +9,14 @@ module Bio.RNAalifoldParser (
 
 import Bio.RNAalifoldData
 import Text.ParserCombinators.Parsec
-import Text.ParserCombinators.Parsec.Token
-import Text.ParserCombinators.Parsec.Language (emptyDef)    
-import Control.Monad
 
 readDouble :: String -> Double
 readDouble = read              
 
-readInt :: String -> Int
-readInt = read
-
 -- | Parse the consenus of RNAz results         
 genParserRNAalifold :: GenParser Char st RNAalifoldOutput
 genParserRNAalifold = do
-  sequence <- many1 (noneOf "\n")                
+  _sequence <- many1 (noneOf "\n")                
   newline
   secondaryStructure <- many1 (oneOf "&().,")
   string (" (")
@@ -36,8 +30,10 @@ genParserRNAalifold = do
   string (")")
   many1 space
   eof
-  return $ RNAalifoldOutput sequence secondaryStructure (readDouble foldingEnergy) (readDouble initialFoldingEnergy) (readDouble covarianceContributionEnergy)   
+  return $ RNAalifoldOutput _sequence secondaryStructure (readDouble foldingEnergy) (readDouble initialFoldingEnergy) (readDouble covarianceContributionEnergy)
+   
 -- | parse RNAalifold output from input string
+parseRNAalifold :: [Char] -> Either ParseError RNAalifoldOutput
 parseRNAalifold input = parse genParserRNAalifold "genParseRNAalifold" input
 
 -- | parse RNAalifold output from input filePath                      

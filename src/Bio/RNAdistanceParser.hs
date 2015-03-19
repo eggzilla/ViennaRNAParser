@@ -8,10 +8,7 @@ module Bio.RNAdistanceParser (
                       ) where
 
 import Bio.RNAdistanceData
-import Text.ParserCombinators.Parsec
-import Text.ParserCombinators.Parsec.Token
-import Text.ParserCombinators.Parsec.Language (emptyDef)    
-import Control.Monad      
+import Text.ParserCombinators.Parsec     
 
 readInt :: String -> Int
 readInt = read
@@ -26,6 +23,7 @@ genParserRNAdistance = do
   return $ RNAdistance (readInt distance)
 
 -- | parse RNAdistance output from input string
+parseRNAdistance :: [Char] -> Either ParseError RNAdistance
 parseRNAdistance input = parse genParserRNAdistance "genParseRNAdistance" input
 
 -- | parse RNAdistance output from input filePath                      

@@ -8,11 +8,8 @@ module Bio.RNAplexParser (
                       ) where
 
 import Bio.RNAplexData
-import Text.ParserCombinators.Parsec
-import Text.ParserCombinators.Parsec.Token
-import Text.ParserCombinators.Parsec.Language (emptyDef)    
+import Text.ParserCombinators.Parsec    
 import Control.Monad
---import Control.Applicative
 
 readDouble :: String -> Double
 readDouble = read              
@@ -31,42 +28,43 @@ parseRNAplexOutput = do
 parseRNAplexInteraction :: GenParser Char st RNAplexInteraction
 parseRNAplexInteraction = do
   string (">") 
-  targetIdentifier <- many1 (noneOf "\n")                
+  _targetIdentifier <- many1 (noneOf "\n")                
   newline
   string (">") 
-  queryIdentifier <- many1 (noneOf "\n")                
+  _queryIdentifier <- many1 (noneOf "\n")                
   newline 
-  secondaryStructure <- many1 (oneOf "&().,")
+  _secondaryStructure <- many1 (oneOf "&().,")
   many1 space
-  targetDuplexBegin <- many1 digit
+  _targetDuplexBegin <- many1 digit
   char ','
-  targetDuplexEnd <- many1 digit
+  _targetDuplexEnd <- many1 digit
   many1 space
   char ':'
   many1 space
-  queryDuplexBegin <- many1 digit
+  _queryDuplexBegin <- many1 digit
   char ','
-  queryDuplexEnd <- many1 digit
+  _queryDuplexEnd <- many1 digit
   many1 space
   char '('
-  duplexEnergy <- many1 (noneOf (" )"))
+  _duplexEnergy <- many1 (noneOf (" )"))
   optional space
   optional (char '=')
   optional space
-  duplexEnergyWithoutAccessiblity <- optionMaybe (try (many1 (noneOf (" )"))))
+  _duplexEnergyWithoutAccessiblity <- optionMaybe (try (many1 (noneOf (" )"))))
   optional space 
   optional (char '+')
   optional (many1 space)
-  queryAccessiblity <- optionMaybe (try (many1 (noneOf (" )")))) 
+  _queryAccessiblity <- optionMaybe (try (many1 (noneOf (" )")))) 
   optional space 
   optional (char '+')
   optional (many1 space)
-  targetAccessibility <- optionMaybe (try (many1 (noneOf (")"))))
+  _targetAccessibility <- optionMaybe (try (many1 (noneOf (")"))))
   char ')'
   newline
-  return $ RNAplexInteraction targetIdentifier queryIdentifier secondaryStructure (readInt targetDuplexBegin) (readInt targetDuplexEnd) (readInt queryDuplexBegin) (readInt queryDuplexEnd) (readDouble duplexEnergy) (liftM readDouble duplexEnergyWithoutAccessiblity) (liftM readDouble queryAccessiblity) (liftM readDouble targetAccessibility)
+  return $ RNAplexInteraction _targetIdentifier _queryIdentifier _secondaryStructure (readInt _targetDuplexBegin) (readInt _targetDuplexEnd) (readInt _queryDuplexBegin) (readInt _queryDuplexEnd) (readDouble _duplexEnergy) (liftM readDouble _duplexEnergyWithoutAccessiblity) (liftM readDouble _queryAccessiblity) (liftM readDouble _targetAccessibility)
 
 -- | parse RNAplexOutput from input string
+parseRNAplex :: [Char] -> Either ParseError [RNAplexInteraction]
 parseRNAplex input = parse parseRNAplexOutput "parseRNAplexOutput" input
 
 -- | parse from input filePath                      

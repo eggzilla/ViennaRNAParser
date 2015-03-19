@@ -9,11 +9,7 @@ module Bio.RNAzParser (
                       ) where
 
 import Bio.RNAzData
---import Biobase.RNA
 import Text.ParserCombinators.Parsec
---import Text.ParserCombinators.Parsec.Token
---import Text.ParserCombinators.Parsec.Language (emptyDef)    
---import Control.Monad
 
 readDouble :: String -> Double
 readDouble = read              
@@ -122,9 +118,9 @@ parseRNAzConsensus :: GenParser Char st RNAzConsensus
 parseRNAzConsensus = do
   string (">consensus")
   newline
-  consensusSequence <- many1 (oneOf "~_-NATUGCatugc")                 
+  _consensusSequence <- many1 (oneOf "~_-NATUGCatugc")                 
   newline          
-  dotBracket <- many1 (oneOf "().,")
+  _dotBracket <- many1 (oneOf "().,")
   space
   char '('
   optional space
@@ -142,7 +138,7 @@ parseRNAzConsensus = do
   space
   newline
   eof   
-  return $ RNAzConsensus consensusSequence dotBracket
+  return $ RNAzConsensus _consensusSequence _dotBracket
          
 -- | parse RNAzOutput from input string
 parseRNAz :: [Char] -> Either ParseError RNAzOutput
