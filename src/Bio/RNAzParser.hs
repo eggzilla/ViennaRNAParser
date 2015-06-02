@@ -3,6 +3,7 @@
 -- | Parse RNAz output
 --   For more information on RNAz consult: <http://www.tbi.univie.ac.at/~wash/RNAz
 module Bio.RNAzParser (
+                       systemRNAz,
                        parseRNAz,
                        readRNAz,                                   
                        module Bio.RNAzData
@@ -10,12 +11,19 @@ module Bio.RNAzParser (
 
 import Bio.RNAzData
 import Text.ParserCombinators.Parsec
+import System.Process
+import System.Exit
+import qualified Control.Exception.Base as CE
 
 readDouble :: String -> Double
 readDouble = read              
 
 readInt :: String -> Int
 readInt = read
+
+-- | Run external RNAz command and read the output into the corresponding datatype
+systemRNAz :: (String,String) -> IO ExitCode
+systemRNAz (inputFilePath, outputFilePath) = system ("RNAz " ++ inputFilePath ++ " >" ++ outputFilePath)
 
 -- | Parse the input as RNAzOutput datatype
 parseRNAzOutput :: GenParser Char st RNAzOutput
@@ -146,4 +154,6 @@ parseRNAz input = parse parseRNAzOutput "parseRNAzOutput" input
 
 -- | parse from input filePath                      
 readRNAz :: String -> IO (Either ParseError RNAzOutput)                  
-readRNAz filePath = parseFromFile parseRNAzOutput filePath
+readRNAz filePath = do 
+  parsedFile <- parseFromFile parseRNAzOutput filePath
+  CE.evaluate parsedFile

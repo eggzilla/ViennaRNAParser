@@ -2,6 +2,7 @@
 --   For more information on RNAplex consult: <>
 
 module Bio.RNAfoldParser (
+                       systemRNAfold,
                        parseRNAfold,
                        readRNAfold,                                   
                        module Bio.RNAfoldData
@@ -9,6 +10,13 @@ module Bio.RNAfoldParser (
 
 import Bio.RNAfoldData
 import Text.ParserCombinators.Parsec
+import System.Process 
+import System.Exit
+import qualified Control.Exception.Base as CE
+
+-- | Run external RNAfold command and read the output into the corresponding datatype
+systemRNAfold :: String -> String -> IO ExitCode
+systemRNAfold inputFilePath outputFilePath = system ("RNAfold --noPS  <" ++ inputFilePath  ++ " >" ++ outputFilePath)
 
 readDouble :: String -> Double
 readDouble = read              
@@ -34,4 +42,6 @@ parseRNAfold input = parse genParserRNAfold "genParseRNAfold" input
 
 -- | parse RNAfold output from input filePath                      
 readRNAfold :: String -> IO (Either ParseError RNAfold)                  
-readRNAfold filePath = parseFromFile genParserRNAfold filePath
+readRNAfold filePath = do
+  parsedFile <- parseFromFile genParserRNAfold filePath
+  CE.evaluate parsedFile
