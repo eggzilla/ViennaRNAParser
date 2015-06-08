@@ -28,7 +28,8 @@ genParserRNAalifold = do
   newline
   secondaryStructure <- many1 (oneOf "&().,")
   string (" (")
-  foldingEnergy <- many1 (noneOf " ")
+  optional space
+  foldingEnergy <- many1 (oneOf "-.1234567890")
   string " ="
   many1 space
   initialFoldingEnergy <- many1 (noneOf " ")
