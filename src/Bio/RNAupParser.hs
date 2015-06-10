@@ -71,9 +71,16 @@ parseRNAupInteractionRegion = do
   char '&'
   targetSequence <- many1 (noneOf ("\n"))
   newline
-  _upOutputFileName <- many1 (noneOf ("\n"))
-  newline
+  _upOutputFileName <- optionMaybe (try parseRNAupFileName)
   return $ RNAupInteractionRegion upsecondaryStructure (readInt uptargetDuplexBegin) (readInt uptargetDuplexEnd) (readInt upqueryDuplexBegin) (readInt upqueryDuplexEnd) (readDouble upduplexEnergy) (liftM readDouble upduplexEnergyWithoutAccessiblity) (liftM readDouble upqueryAccessiblity) (liftM readDouble uptargetAccessibility) querySequence targetSequence _upOutputFileName
+
+-- | Parse a RNAupFileName
+parseRNAupFileName :: GenParser Char st String
+parseRNAupFileName = do
+  string "RNAup output in file: "
+  fileName <- many1 (noneOf ("\n>"))
+  newline
+  return fileName
 
 -- | parse RNAupOutput from input string
 parseRNAup :: [Char] -> Either ParseError [RNAupInteraction]

@@ -28,6 +28,6 @@ data RNAupInteractionRegion = RNAupInteractionRegion
   upTargetAccessibility :: Maybe Double,
   upQuerySequence :: String,
   upTargetSequence :: String,
-  upOutputFileName :: String
+  upOutputFileName :: Maybe String
  }
  deriving (Show, Eq)
