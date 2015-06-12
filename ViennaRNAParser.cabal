@@ -55,5 +55,8 @@ library
   -- Directories containing source files.
   hs-source-dirs:      src
 
-  
-    
+test-suite hspec
+    build-depends:    base, parsec, ViennaRNAParser, hspec == 1.8.*
+    hs-source-dirs:   test-suite
+    main-is:          Spec.hs
+    type:             exitcode-stdio-1.0
