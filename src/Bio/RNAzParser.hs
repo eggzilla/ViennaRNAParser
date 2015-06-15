@@ -22,8 +22,8 @@ readInt :: String -> Int
 readInt = read
 
 -- | Run external RNAz command and read the output into the corresponding datatype
-systemRNAz :: (String,String) -> IO ExitCode
-systemRNAz (inputFilePath, outputFilePath) = system ("RNAz " ++ inputFilePath ++ " >" ++ outputFilePath)
+systemRNAz :: String -> String -> IO ExitCode
+systemRNAz inputFilePath outputFilePath = system ("RNAz " ++ inputFilePath ++ " >" ++ outputFilePath)
 
 -- | Parse the input as RNAzOutput datatype
 parseRNAzOutput :: GenParser Char st RNAzOutput
