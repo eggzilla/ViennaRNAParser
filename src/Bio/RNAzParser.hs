@@ -100,7 +100,7 @@ parseRNAzResult = do
   _header <- many1 (noneOf "\n")
   newline 
   notFollowedBy (string (">consensus"))
-  _resultSequence <- many1 (oneOf "~-NATUGCatugc")         
+  _resultSequence <- many1 (oneOf "~_-.NATUGCatugc")         
   newline        
   _dotBracket <- many1 (oneOf "-().,")
   space
@@ -126,7 +126,7 @@ parseRNAzConsensus :: GenParser Char st RNAzConsensus
 parseRNAzConsensus = do
   string (">consensus")
   newline
-  _consensusSequence <- many1 (oneOf "~_-NATUGCatugc")                 
+  _consensusSequence <- many1 (oneOf "~_-.NATUGCatugc")                 
   newline          
   _dotBracket <- many1 (oneOf "().,")
   space
