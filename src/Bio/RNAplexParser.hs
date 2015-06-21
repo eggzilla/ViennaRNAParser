@@ -46,6 +46,7 @@ parseRNAplexInteraction = do
   _queryDuplexEnd <- many1 digit
   many1 space
   char '('
+  optional space
   _duplexEnergy <- many1 (noneOf (" )"))
   optional space
   optional (char '=')
