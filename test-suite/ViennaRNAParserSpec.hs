@@ -15,6 +15,13 @@ spec = do
     context "Parsing invalid input" $ do
       it "Returns ParseError" $ do
         (parseRNAalifold "invalid input") `shouldBe` Left rnaalifoldParseError
+  describe "RNAcofoldParser" $ do
+    context "Parsing RNAcofold input" $ do
+      it "Returns RNAcofold type" $ do
+        (parseRNAcofold rnacofoldexample) `shouldBe` Right rnacofoldresult
+    context "Parsing invalid input" $ do
+      it "Returns ParseError" $ do
+        (parseRNAcofold "invalid input") `shouldBe` Left rnacofoldParseError
   describe "RNAdistanceParser" $ do
     context "Parsing RNAdistance input" $ do
       it "Returns RNAdistance type" $ do
@@ -73,6 +80,21 @@ rnadistanceErrorMessage = SysUnExpect "\"i\""
 
 rnadistanceErrorSourcePosition :: SourcePos
 rnadistanceErrorSourcePosition = newPos "genParseRNAdistance" 1 1
+
+rnacofoldexample :: String
+rnacofoldexample = "ccccauccccacccccaagcgagcaccugccccucc&cgggggcggagcuccggcgcauca\n..................((((((..((((((((..&.)))))))).))))..))...... (-22.50)"
+
+rnacofoldresult :: RNAcofold
+rnacofoldresult = RNAcofold "ccccauccccacccccaagcgagcaccugccccucc" "cgggggcggagcuccggcgcauca" "..................((((((..((((((((.." ".)))))))).))))..))......" (-22.50)
+
+rnacofoldParseError :: ParseError
+rnacofoldParseError = (newErrorMessage rnacofoldErrorMessage rnacofoldErrorSourcePosition)
+
+rnacofoldErrorMessage :: Message
+rnacofoldErrorMessage = SysUnExpect "\"i\""
+
+rnacofoldErrorSourcePosition :: SourcePos
+rnacofoldErrorSourcePosition = newPos "genParseRNAcofold" 1 1
 
 rnafoldexample :: String
 rnafoldexample = ">AB001721.1/2735-2851\nCCCGGUGACUAUAGAGAGAGGGCCACACCCGUUCCCAUCCCGAACACGGAAGUUAAGCCUCUCAUCGCUGAUGGUACUAUGUGGUUCGCUGCAUGGGAGAGUAGGACGUUGCCGGGU\n(((((((((....(.(((.(((.....))).))).)...(((....)))..(((..(((((((((.((.(.(((.(((....))))))).))))))))).))..)))))))))))). (-38.30)"
