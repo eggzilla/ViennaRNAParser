@@ -25,9 +25,9 @@ readInt = read
 systemRNAz :: String -> String -> IO ExitCode
 systemRNAz inputFilePath outputFilePath = system ("RNAz " ++ inputFilePath ++ " >" ++ outputFilePath)
 
--- | Parse the input as RNAzOutput datatype
-parseRNAzOutput :: GenParser Char st RNAzOutput
-parseRNAzOutput = do
+-- | Parse the input as RNAz datatype
+genParseRNAz :: GenParser Char st RNAz
+genParseRNAz = do
   char '\n'
   many1 (oneOf "# ")
   string "RNAz"
@@ -62,7 +62,7 @@ parseRNAzOutput = do
   newline
   _rnaZResults  <- many1 (try parseRNAzResult)
   _rnaZConsensus <- parseRNAzConsensus         
-  return $ RNAzOutput _version _sequences _columns _readingDirection _meanPairwiseIdentity _shannonEntropy _gcContent _meanSingleSequenceMFE _consensusMFE _energyContribution _covarianceContribution _combinationsPair _meanZScore _structureConservationIndex _backgroundModel _decisionModel _svmDecisionValue _svmRNAClassProbability _prediction _rnaZResults _rnaZConsensus
+  return $ RNAz _version _sequences _columns _readingDirection _meanPairwiseIdentity _shannonEntropy _gcContent _meanSingleSequenceMFE _consensusMFE _energyContribution _covarianceContribution _combinationsPair _meanZScore _structureConservationIndex _backgroundModel _decisionModel _svmDecisionValue _svmRNAClassProbability _prediction _rnaZResults _rnaZConsensus
 
 -- | Parse a RNAz field containing a Double 
 parseRNAzDoubleField :: String -> GenParser Char st Double
@@ -148,12 +148,12 @@ parseRNAzConsensus = do
   eof   
   return $ RNAzConsensus _consensusSequence _dotBracket
          
--- | parse RNAzOutput from input string
-parseRNAz :: [Char] -> Either ParseError RNAzOutput
-parseRNAz input = parse parseRNAzOutput "parseRNAzOutput" input
+-- | parse RNAz from input string
+parseRNAz :: [Char] -> Either ParseError RNAz
+parseRNAz input = parse genParseRNAz "parseRNAz" input
 
 -- | parse from input filePath                      
-readRNAz :: String -> IO (Either ParseError RNAzOutput)                  
+readRNAz :: String -> IO (Either ParseError RNAz)                  
 readRNAz filePath = do 
-  parsedFile <- parseFromFile parseRNAzOutput filePath
+  parsedFile <- parseFromFile genParseRNAz filePath
   CE.evaluate parsedFile

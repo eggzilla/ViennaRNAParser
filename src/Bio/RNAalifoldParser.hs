@@ -22,7 +22,7 @@ systemRNAalifold :: String -> String -> String -> IO ExitCode
 systemRNAalifold options inputFilePath outputFilePath = system ("RNAalifold " ++ options  ++ " < " ++ inputFilePath  ++ " > " ++ outputFilePath)
 
 -- | Parse the consenus of RNAz results         
-genParserRNAalifold :: GenParser Char st RNAalifoldOutput
+genParserRNAalifold :: GenParser Char st RNAalifold
 genParserRNAalifold = do
   _sequence <- many1 (noneOf "\n")                
   newline
@@ -39,14 +39,14 @@ genParserRNAalifold = do
   string (")")
   many1 space
   eof
-  return $ RNAalifoldOutput _sequence secondaryStructure (readDouble foldingEnergy) (readDouble initialFoldingEnergy) (readDouble covarianceContributionEnergy)
+  return $ RNAalifold _sequence secondaryStructure (readDouble foldingEnergy) (readDouble initialFoldingEnergy) (readDouble covarianceContributionEnergy)
    
 -- | parse RNAalifold output from input string
-parseRNAalifold :: [Char] -> Either ParseError RNAalifoldOutput
+parseRNAalifold :: [Char] -> Either ParseError RNAalifold
 parseRNAalifold input = parse genParserRNAalifold "genParseRNAalifold" input
 
 -- | parse RNAalifold output from input filePath                      
-readRNAalifold :: String -> IO (Either ParseError RNAalifoldOutput)                  
+readRNAalifold :: String -> IO (Either ParseError RNAalifold)
 readRNAalifold filePath = do
   parsedFile <- parseFromFile genParserRNAalifold filePath
   CE.evaluate parsedFile

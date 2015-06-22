@@ -6,7 +6,7 @@ module Bio.RNAzData where
 --import Biobase.RNA
     
 -- | All elements of RNAz output are contained in this datatype 
-data RNAzOutput = RNAzOutput
+data RNAz = RNAz
   { version :: String,
     sequenceNumber :: Int,
     columnNumber :: Int,
