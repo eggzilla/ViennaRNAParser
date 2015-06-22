@@ -1,9 +1,8 @@
--- | This module contains a hierarchical data structure for
---   RNAplex output
---   For more information on RNAplex consult: <http://www.bioinf.uni-leipzig.de/Software/RNAplex/>
+-- | This module contains a data structure for RNAfold output
+--   For more information on RNAplex consult: <http://www.tbi.univie.ac.at/RNA/RNAfold.html>
 
 module Bio.RNAfoldData where
--- | Data structure for individual interaction between a target and query nucleic acid seqence
+-- | Data structure for RNAfold
 data RNAfold = RNAfold
   { 
     sequenceIdentifier :: String,

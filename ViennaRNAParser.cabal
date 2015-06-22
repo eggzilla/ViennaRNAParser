@@ -7,7 +7,7 @@ name:                ViennaRNAParser
 --                   | | | +--- code changes with no API change
 version:             1.1.0
 synopsis:            Libary for parsing ViennaRNA package output
-description:         Currently contains parsers and datatypes for: RNAplex, RNAz, RNAup, RNAalifold, RNAdistance.
+description:         Currently contains parsers and datatypes for: RNAalifold, RNAdistance, RNAcofold, RNAfold, RNAplex, RNAup, RNAz.
 		     .
 		     For more information on the ViennaRNA package refer to <http://www.tbi.univie.ac.at/RNA/>.
 		     .
@@ -33,6 +33,8 @@ source-repository this
 library
   -- Modules exported by the library.
   exposed-modules:   Bio.ViennaRNAParser
+                     Bio.RNAcofoldData
+                     Bio.RNAcofoldParser
                      Bio.RNAfoldData
                      Bio.RNAfoldParser
                      Bio.RNAplexData

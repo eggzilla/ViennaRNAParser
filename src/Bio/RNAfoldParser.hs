@@ -1,5 +1,5 @@
 -- | Parse RNAfold output
---   For more information on RNAplex consult: <>
+--   For more information on RNAfold consult: <http://www.tbi.univie.ac.at/RNA/RNAfold>
 
 module Bio.RNAfoldParser (
                        systemRNAfold,
