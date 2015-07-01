@@ -1,0 +1,11 @@
+-*-change-log-*-
+1.2.0 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 1. July 2015
+	* Added Hspec test-suite
+	* Added RNAcofold parser
+1.1.0 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 2. June 2015
+	* Exposed submodules for imports, added systemcalls for RNAalifold,
+	RNAfold, RNAz
+1.0.1 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 1. March 2015
+	* Added Travis CI support
+	* Added -Wall and -O2 compiler options
+	* Added RNAfold, RNAalifold, RNAdistance, RNAup parsers
