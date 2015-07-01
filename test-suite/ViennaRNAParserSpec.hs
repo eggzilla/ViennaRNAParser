@@ -5,6 +5,10 @@ import Test.Hspec
 import Test.Hspec.QuickCheck
 import Text.Parsec.Error
 import Text.Parsec.Pos
+import Text.ParserCombinators.Parsec.Error
+
+instance Eq ParseError where
+   a == b = errorMessages a == errorMessages b
 
 spec :: Spec
 spec = do
