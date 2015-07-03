@@ -8,14 +8,9 @@ module Bio.RNAupParser (
                       ) where
 
 import Bio.RNAupData
+import Bio.ViennaRNAParserLibrary
 import Text.ParserCombinators.Parsec    
 import Control.Monad
-
-readDouble :: String -> Double
-readDouble = read              
-
-readInt :: String -> Int
-readInt = read
 
 -- | Parse the input as list of RNAupInteraction datatype
 parseRNAupOutput :: GenParser Char st [RNAupInteraction]

@@ -1,4 +1,8 @@
 -*-change-log-*-
+1.2.2 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 4. July 2015
+        * Added a new module for shared functions between modules
+	* Sequence and alignment entry parsing is now in line with IUPAC
+	letter code
 1.2.1 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 3. July 2015
         * Included parsing of warning field in RNAz output
 1.2.0 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 1. July 2015

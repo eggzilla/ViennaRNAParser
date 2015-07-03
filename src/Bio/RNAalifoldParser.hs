@@ -1,5 +1,5 @@
 -- | Parse RNAalifold output
---   For more information on RNAalifold consult: <>
+--   For more information on RNAalifold consult: <<http://www.tbi.univie.ac.at/RNA/RNAalifold.html>
 
 module Bio.RNAalifoldParser (
                        systemRNAalifold,
@@ -9,13 +9,11 @@ module Bio.RNAalifoldParser (
                       ) where
 
 import Bio.RNAalifoldData
+import Bio.ViennaRNAParserLibrary
 import Text.ParserCombinators.Parsec
 import System.Process
 import System.Exit
 import qualified Control.Exception.Base as CE
-
-readDouble :: String -> Double
-readDouble = read              
 
 --- | Run external RNAalifold command and read the output into the corresponding datatype
 systemRNAalifold :: String -> String -> String -> IO ExitCode

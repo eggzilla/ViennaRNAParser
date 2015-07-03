@@ -9,6 +9,7 @@ module Bio.RNAcofoldParser (
                       ) where
 
 import Bio.RNAcofoldData
+import Bio.ViennaRNAParserLibrary
 import Text.ParserCombinators.Parsec
 import System.Process 
 import System.Exit
@@ -17,9 +18,6 @@ import qualified Control.Exception.Base as CE
 -- | Run external RNAcofold command 
 systemRNAcofold :: String -> String -> IO ExitCode
 systemRNAcofold inputFilePath outputFilePath = system ("RNAcofold  <" ++ inputFilePath  ++ " >" ++ outputFilePath)
-
-readDouble :: String -> Double
-readDouble = read              
 
 -- | Parse the consenus of RNAcofold results         
 genParserRNAcofold :: GenParser Char st RNAcofold

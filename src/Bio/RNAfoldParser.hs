@@ -10,6 +10,7 @@ module Bio.RNAfoldParser (
 
 import Bio.RNAfoldData
 import Text.ParserCombinators.Parsec
+import Bio.ViennaRNAParserLibrary
 import System.Process 
 import System.Exit
 import qualified Control.Exception.Base as CE
@@ -17,9 +18,6 @@ import qualified Control.Exception.Base as CE
 -- | Run external RNAfold command and read the output into the corresponding datatype
 systemRNAfold :: String -> String -> IO ExitCode
 systemRNAfold inputFilePath outputFilePath = system ("RNAfold --noPS  <" ++ inputFilePath  ++ " >" ++ outputFilePath)
-
-readDouble :: String -> Double
-readDouble = read              
 
 -- | Parse the consenus of RNAz results         
 genParserRNAfold :: GenParser Char st RNAfold

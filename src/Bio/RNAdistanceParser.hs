@@ -1,5 +1,5 @@
 -- | Parse RNAdistance output
---   For more information on RNAdistance consult: <>
+--   For more information on RNAdistance consult: <<http://www.tbi.univie.ac.at/RNA/RNAdistance.html>
 
 module Bio.RNAdistanceParser (
                        parseRNAdistance,
@@ -8,10 +8,8 @@ module Bio.RNAdistanceParser (
                       ) where
 
 import Bio.RNAdistanceData
+import Bio.ViennaRNAParserLibrary
 import Text.ParserCombinators.Parsec     
-
-readInt :: String -> Int
-readInt = read
 
 -- | Parse the consenus of RNAz results         
 genParserRNAdistance :: GenParser Char st RNAdistance

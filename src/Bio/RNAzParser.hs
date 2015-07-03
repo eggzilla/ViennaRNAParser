@@ -1,5 +1,3 @@
-{-# LANGUAGE Arrows #-}
-
 -- | Parse RNAz output
 --   For more information on RNAz consult: <http://www.tbi.univie.ac.at/~wash/RNAz
 module Bio.RNAzParser (
@@ -10,16 +8,11 @@ module Bio.RNAzParser (
                       ) where
 
 import Bio.RNAzData
+import Bio.ViennaRNAParserLibrary
 import Text.ParserCombinators.Parsec
 import System.Process
 import System.Exit
 import qualified Control.Exception.Base as CE
-
-readDouble :: String -> Double
-readDouble = read              
-
-readInt :: String -> Int
-readInt = read
 
 -- | Run external RNAz command and read the output into the corresponding datatype
 systemRNAz :: String -> String -> IO ExitCode
@@ -102,7 +95,7 @@ parseRNAzResult = do
   _header <- many1 (noneOf "\n")
   newline 
   notFollowedBy (string (">consensus"))
-  _resultSequence <- many1 (oneOf "~_-.NATUGCatugc")         
+  _resultSequence <- parseNucleotideAlignmentEntry
   newline        
   _dotBracket <- many1 (oneOf "-().,")
   space
@@ -128,7 +121,7 @@ parseRNAzConsensus :: GenParser Char st RNAzConsensus
 parseRNAzConsensus = do
   string (">consensus")
   newline
-  _consensusSequence <- many1 (oneOf "~_-.NATUGCatugc")                 
+  _consensusSequence <- parseNucleotideAlignmentEntry
   newline          
   _dotBracket <- many1 (oneOf "().,")
   space

@@ -8,14 +8,9 @@ module Bio.RNAplexParser (
                       ) where
 
 import Bio.RNAplexData
+import Bio.ViennaRNAParserLibrary
 import Text.ParserCombinators.Parsec    
 import Control.Monad
-
-readDouble :: String -> Double
-readDouble = read              
-
-readInt :: String -> Int
-readInt = read
 
 -- | Parse the input as list of RNAplexInteraction datatype
 parseRNAplexOutput :: GenParser Char st [RNAplexInteraction]
