@@ -56,6 +56,8 @@ genParseRNAz = do
   _svmDecisionValue <-  parseRNAzDoubleField "SVM decision value:"
   _svmRNAClassProbability <- parseRNAzDoubleField "SVM RNA-class probability:"
   _prediction <- parseRNAzStringField "Prediction:"
+  optional (try (string " WARNING: Mean z-score out of range."))
+  optional (try newline)
   newline
   many1 (char '#') 
   newline
