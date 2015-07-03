@@ -1,4 +1,6 @@
 -*-change-log-*-
+1.2.1 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 3. July 2015
+        * Included parsing of warning field in RNAz output
 1.2.0 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 1. July 2015
 	* Added Hspec test-suite
 	* Added RNAcofold parser
