@@ -1,3 +1,4 @@
+
 -- | Parse RNAz output
 --   For more information on RNAz consult: <http://www.tbi.univie.ac.at/~wash/RNAz
 module Bio.RNAzParser (
@@ -49,8 +50,7 @@ genParseRNAz = do
   _svmDecisionValue <-  parseRNAzDoubleField "SVM decision value:"
   _svmRNAClassProbability <- parseRNAzDoubleField "SVM RNA-class probability:"
   _prediction <- parseRNAzStringField "Prediction:"
-  optional (try (string " WARNING: Mean z-score out of range."))
-  optional (try newline)
+  _ <- optional (try (parseRNAzStringField " WARNING:"))
   newline
   many1 (char '#') 
   newline

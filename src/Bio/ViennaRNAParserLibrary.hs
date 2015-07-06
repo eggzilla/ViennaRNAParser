@@ -19,13 +19,13 @@ readInt = read
 -- | Parse nucleotide sequence. Allowed letters according to IUPAC
 parseNucleotideSequence :: GenParser Char st String
 parseNucleotideSequence = do
-  nucleotideSequence <- many1 (oneOf "RYSWKMBDHVNATUGCatugc") 
+  nucleotideSequence <- many1 (oneOf "RYSWKMBDHVNATUGCryswkmbdhvnatugc") 
   return $ nucleotideSequence
 
 -- | Parse nucleotide alignment entry. Allowed letters according to IUPAC and commonly used gap characters
 parseNucleotideAlignmentEntry :: GenParser Char st String
 parseNucleotideAlignmentEntry = do
-  entry <- many1 (oneOf "~_-.RYSWKMBDHVNATUGCatugc") 
+  entry <- many1 (oneOf "~_-.RYSWKMBDHVNATUGCryswkmbdhvnatugc") 
   return $ entry
 
 -- | Parse protein amino acid code sequence. Allowed letters according to IUPAC
