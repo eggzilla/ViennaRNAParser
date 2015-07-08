@@ -1,4 +1,6 @@
 -*-change-log-*-
+1.2.4 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 8. July 2015
+        * Fixed surplus whitespace in RNAz parsing function
 1.2.3 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 7. July 2015
 	* Added lower case letters to allowed sequence characters
 1.2.2 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 4. July 2015

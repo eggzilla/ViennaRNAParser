@@ -50,7 +50,7 @@ genParseRNAz = do
   _svmDecisionValue <-  parseRNAzDoubleField "SVM decision value:"
   _svmRNAClassProbability <- parseRNAzDoubleField "SVM RNA-class probability:"
   _prediction <- parseRNAzStringField "Prediction:"
-  _ <- optional (try (parseRNAzStringField " WARNING:"))
+  _ <- optional (try (parseRNAzStringField "WARNING:"))
   newline
   many1 (char '#') 
   newline
