@@ -50,7 +50,7 @@ genParseRNAz = do
   _svmDecisionValue <-  parseRNAzDoubleField "SVM decision value:"
   _svmRNAClassProbability <- parseRNAzDoubleField "SVM RNA-class probability:"
   _prediction <- parseRNAzStringField "Prediction:"
-  _ <- optional (try (parseRNAzStringField "WARNING:"))
+  _ <- many (try (parseRNAzStringField "WARNING:"))
   newline
   many1 (char '#') 
   newline
@@ -124,21 +124,20 @@ parseRNAzConsensus = do
   _consensusSequence <- parseNucleotideAlignmentEntry
   newline          
   _dotBracket <- many1 (oneOf "().,")
-  space
+  many (try (char ' '))
   char '('
-  optional space
+  many (try (char ' '))
   many1 (oneOf "-1234567890.")
-  space
+  many (try (char ' '))
   char '='
-  space
-  optional space 
+  many (try (char ' '))
   many1 (oneOf "-1234567890.")
-  space
+  many (try (char ' '))
   char '+'
-  many1 space
+  many (try (char ' '))
   many1 (noneOf ")")
   char ')'
-  space
+  many (try (char ' '))
   newline
   eof   
   return $ RNAzConsensus _consensusSequence _dotBracket

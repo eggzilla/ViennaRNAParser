@@ -1,4 +1,7 @@
 -*-change-log-*-
+1.2.5 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 9. July 2015
+        * Fixed parsing of multiple warning fields and optional whitespaces in
+	RNAz consensus energy
 1.2.4 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 8. July 2015
         * Fixed surplus whitespace in RNAz parsing function
 1.2.3 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 7. July 2015
