@@ -16,8 +16,8 @@ import System.Exit
 import qualified Control.Exception.Base as CE
 
 -- | Run external RNAz command and read the output into the corresponding datatype
-systemRNAz :: String -> String -> IO ExitCode
-systemRNAz inputFilePath outputFilePath = system ("RNAz " ++ inputFilePath ++ " >" ++ outputFilePath)
+systemRNAz :: String -> String -> String -> IO ExitCode
+systemRNAz options inputFilePath outputFilePath = system ("RNAz " ++ options ++ " " ++ inputFilePath ++ " >" ++ outputFilePath)
 
 -- | Parse the input as RNAz datatype
 genParseRNAz :: GenParser Char st RNAz
