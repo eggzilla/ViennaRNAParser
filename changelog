@@ -1,4 +1,7 @@
 -*-change-log-*-
+
+1.2.6 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 7. September 2015
+        * Added a options argument to RNAz systemcall function
 1.2.5 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 9. July 2015
         * Fixed parsing of multiple warning fields and optional whitespaces in
 	RNAz consensus energy
