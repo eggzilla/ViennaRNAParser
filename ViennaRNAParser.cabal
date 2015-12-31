@@ -5,9 +5,9 @@ name:                ViennaRNAParser
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             1.2.5
+version:             1.2.7
 synopsis:            Libary for parsing ViennaRNA package output
-description:         Currently contains parsers and datatypes for: RNAalifold, RNAdistance, RNAcofold, RNAfold, RNAplex, RNAup, RNAz.
+description:         Currently contains parsers and datatypes for: RNAalifold, RNAcode, RNAdistance, RNAcofold, RNAfold, RNAplex, RNAup, RNAz.
 		     .
 		     For more information on the ViennaRNA package refer to <http://www.tbi.univie.ac.at/RNA/>.
 		     .
@@ -30,13 +30,15 @@ source-repository head
 
 source-repository this
   type:     git
-  location: https://github.com/eggzilla/ViennaRNAParser/tree/1.2.5
-  tag:      1.2.5
+  location: https://github.com/eggzilla/ViennaRNAParser/tree/1.2.7
+  tag:      1.2.7
 
 library
   -- Modules exported by the library.
   exposed-modules:   Bio.ViennaRNAParser
                      Bio.ViennaRNAParserLibrary
+                     Bio.RNAcodeData
+                     Bio.RNAcodeParser
                      Bio.RNAcofoldData
                      Bio.RNAcofoldParser
                      Bio.RNAfoldData

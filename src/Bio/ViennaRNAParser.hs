@@ -3,7 +3,9 @@
 -- For more information on the Vienna RNAPackage consult: <http://www.tbi.univie.ac.at/~ivo/RNA/>
 -- or the homepage of the current maintainer: <http://www.tbi.univie.ac.at/~ronny/RNA/index.html>
 
-module Bio.ViennaRNAParser ( 
+module Bio.ViennaRNAParser (
+                       module Bio.RNAcodeData,
+		       module Bio.RNAcodeParser,
                        module Bio.RNAcofoldData,
                        module Bio.RNAcofoldParser,                           
                        module Bio.RNAplexData,
@@ -19,6 +21,8 @@ module Bio.ViennaRNAParser (
                        module Bio.RNAupData,
                        module Bio.RNAupParser
                       ) where
+import Bio.RNAcodeData
+import Bio.RNAcodeParser
 import Bio.RNAcofoldData
 import Bio.RNAcofoldParser
 import Bio.RNAplexData
