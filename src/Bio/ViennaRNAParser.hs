@@ -5,7 +5,7 @@
 
 module Bio.ViennaRNAParser (
                        module Bio.RNAcodeData,
-		       module Bio.RNAcodeParser,
+                       module Bio.RNAcodeParser,
                        module Bio.RNAcofoldData,
                        module Bio.RNAcofoldParser,                           
                        module Bio.RNAplexData,
