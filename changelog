@@ -1,4 +1,7 @@
 -*-change-log-*-
+1.2.6 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 4. January 2016
+	* Added RNAcode parser
+	* Added stackage yaml file
 1.2.5 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 9. July 2015
         * Fixed parsing of multiple warning fields and optional whitespaces in
 	RNAz consensus energy
