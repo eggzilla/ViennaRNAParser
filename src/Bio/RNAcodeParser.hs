@@ -64,13 +64,13 @@ genParseRNAcode = do
   _samples <- natural haskell
   string ", Delta="
   --_delta <- float haskell
-  _delta <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
+  _delta <- (try (negate <$ char '-') <|> pure id) <*> float haskell
   string ", Omega="
-  _bigomega <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
+  _bigomega <- (try (negate <$ char '-') <|> pure id) <*> float haskell
   string ", omega="
-  _smallomega <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
+  _smallomega <- (try (negate <$ char '-') <|> pure id) <*> float haskell
   string ", stop penalty="
-  _stopPenalty <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
+  _stopPenalty <- (try (negate <$ char '-') <|> pure id) <*> float haskell
   return $ RNAcode _rnacodeHits (Just (fromInteger _alignmentnumber)) (Just _time) (Just (fromInteger _samples)) (Just _delta) (Just _bigomega) (Just _smallomega) (Just _stopPenalty)
 
 -- | Parse the input as RNAcodeHit
@@ -86,13 +86,13 @@ genParseRNAcodeHit = do
   _start <- natural haskell
   _end <- natural haskell
   _score <- float haskell
-  _pvalue <- many1 (try (choice [digit,(char '.')]))
+  _pvalue <- many1 (try (choice [digit,char '.']))
   newline
   return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) _score (read _pvalue :: Double)
 
 -- | parse RNAcode from input string
-parseRNAcode :: [Char] -> Either ParseError RNAcode
-parseRNAcode input = parse genParseRNAcode "parseRNAcode" input
+parseRNAcode :: String -> Either ParseError RNAcode
+parseRNAcode = parse genParseRNAcode "parseRNAcode"
 
 -- | parse RNAcode from input filePath                      
 readRNAcode :: String -> IO (Either ParseError RNAcode)                  
@@ -101,8 +101,8 @@ readRNAcode filePath = do
   CE.evaluate parsedFile
 
 -- | parse RNAcode from input string
-parseRNAcodeTabular :: [Char] -> Either ParseError RNAcode
-parseRNAcodeTabular input = parse genParseRNAcodeTabular "parseRNAcode" input
+parseRNAcodeTabular :: String -> Either ParseError RNAcode
+parseRNAcodeTabular = parse genParseRNAcodeTabular "parseRNAcode" 
 
 -- | parse RNAcode from input filePath                      
 readRNAcodeTabular :: String -> IO (Either ParseError RNAcode)                  
