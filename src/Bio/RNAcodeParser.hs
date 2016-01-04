@@ -18,6 +18,7 @@ import System.Exit
 import Text.Parsec.Token
 import qualified Control.Exception.Base as CE
 import Text.Parsec.Language (haskell)
+import Control.Applicative ((<*>),(<$>),(<$),pure)
 
 -- | Run external RNAcode command and read the output into the corresponding datatype
 systemRNAcode :: String -> String -> String -> IO ExitCode
