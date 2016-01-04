@@ -1,5 +1,3 @@
-{-# LANGUAGE RankNTypes #-}
-
 -- | Parse RNAcode output
 --   For more information on RNAcode consult: <http://wash.github.io/rnacode/>
 
@@ -19,10 +17,7 @@ import System.Process
 import System.Exit
 import Text.Parsec.Token
 import qualified Control.Exception.Base as CE
-import Text.Parsec.Language (haskellDef)
-
-hTokenParser :: forall u. GenTokenParser String u Data.Functor.Identity.Identity
-hTokenParser = makeTokenParser haskellDef
+import Text.Parsec.Language (haskell)
 
 -- | Run external RNAcode command and read the output into the corresponding datatype
 systemRNAcode :: String -> String -> String -> IO ExitCode
@@ -37,19 +32,17 @@ genParseRNAcodeTabular = do
 -- | Parse the input as RNAcodeHit
 genParseRNAcodeTabularHit :: GenParser Char st RNAcodeHit
 genParseRNAcodeTabularHit = do
-  _hss <- natural hTokenParser
-  _frame <- integer hTokenParser
-  _length <- natural hTokenParser
-  _from <- natural hTokenParser
-  _to <- natural hTokenParser
-  _name <- many1 (noneOf " ")
-  char '\t'
-  _start <- natural hTokenParser
-  _end <- natural hTokenParser
-  _score <- float hTokenParser
-  _pvalue <- float hTokenParser
-  newline
-  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) _score _pvalue
+  _hss <- natural haskell
+  _frame <- integer haskell
+  _length <- natural haskell
+  _from <- natural haskell
+  _to <- natural haskell
+  _name <- identifier haskell
+  _start <- natural haskell
+  _end <- natural haskell
+  _score <- float haskell
+  _pvalue <- float haskell
+  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) _score _pvalue 
 
 
 -- | Parse the input as RNAcode datatype
@@ -59,42 +52,43 @@ genParseRNAcode = do
   string "HSS # Frame Length  From    To        Name       Start         End    Score        P"
   newline
   string "======================================================================================"
-  _rnacodeHits <- many1 genParseRNAcodeHit
   newline
-  _alignmentnumber <- natural hTokenParser
-  string " alignment(s) scored in "
-  _time <- float hTokenParser
-  string " seconds. Parameters used:"
+  _rnacodeHits <- many1 (try genParseRNAcodeHit)
+  newline
+  _alignmentnumber <- natural haskell
+  string "alignment(s) scored in "
+  _time <- float haskell
+  string "seconds. Parameters used:"
   newline
   string "N="
-  _samples <- natural hTokenParser
+  _samples <- natural haskell
   string ", Delta="
-  _delta <- float hTokenParser
+  --_delta <- float haskell
+  _delta <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
   string ", Omega="
-  _bigomega <- float hTokenParser
+  _bigomega <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
   string ", omega="
-  _smallomega <- float hTokenParser
+  _smallomega <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
   string ", stop penalty="
-  _stopPenalty <- float hTokenParser
+  _stopPenalty <- ((try $ negate <$ char '-') <|> pure id) <*> float haskell
   return $ RNAcode _rnacodeHits (Just (fromInteger _alignmentnumber)) (Just _time) (Just (fromInteger _samples)) (Just _delta) (Just _bigomega) (Just _smallomega) (Just _stopPenalty)
 
 -- | Parse the input as RNAcodeHit
 genParseRNAcodeHit :: GenParser Char st RNAcodeHit
 genParseRNAcodeHit = do
-  many1 (char ' ')
-  _hss <- natural hTokenParser
-  _frame <- integer hTokenParser
-  _length <- natural hTokenParser
-  _from <- natural hTokenParser
-  _to <- natural hTokenParser
-  _name <- many1 (noneOf " ")
-  many1 (char ' ')
-  _start <- natural hTokenParser
-  _end <- natural hTokenParser
-  _score <- float hTokenParser
-  _pvalue <- float hTokenParser
+  many (char ' ')
+  _hss <- natural haskell
+  _frame <- integer haskell
+  _length <- natural haskell
+  _from <- natural haskell
+  _to <- natural haskell
+  _name <- identifier haskell
+  _start <- natural haskell
+  _end <- natural haskell
+  _score <- float haskell
+  _pvalue <- many1 (try (choice [digit,(char '.')]))
   newline
-  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) _score _pvalue
+  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) _score (read _pvalue :: Double)
 
 -- | parse RNAcode from input string
 parseRNAcode :: [Char] -> Either ParseError RNAcode

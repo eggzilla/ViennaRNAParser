@@ -1,4 +1,5 @@
 -- | Parser test script
+-- runghc -package-db --ghc-arg=.cabal-sandbox/x86_64-linux-ghc-7.10.3-packages.conf.d/  ViennaRNAParserTest.hs RNAup_interaction_first.out
 --   read from file and directly print parsing output
 
 module Main where
@@ -11,7 +12,7 @@ import System.Environment
 import Data.List
 import Bio.ViennaRNAParser
 import System.Directory
-import System.Cmd
+import System.Process
 import Control.Monad    
 import Data.Either
 import Data.Either.Unwrap
@@ -20,6 +21,6 @@ main = do
   args <- getArgs
   let input_file = (head args)
   putStrLn "Test:"
-  parsedinput <- readRNAz input_file  
+  parsedinput <-  readRNAcode input_file  
   print parsedinput
 
