@@ -39,6 +39,9 @@ genParseRNAcodeTabularHit = do
   _from <- natural haskell
   _to <- natural haskell
   _name <- identifier haskell
+  --_name <- identifier haskell
+  _name <- many1 (oneOf "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890_-")
+  string ("\t")
   _start <- natural haskell
   _end <- natural haskell
   _score <- float haskell
@@ -83,7 +86,9 @@ genParseRNAcodeHit = do
   _length <- natural haskell
   _from <- natural haskell
   _to <- natural haskell
-  _name <- identifier haskell
+  --_name <- identifier haskell
+  _name <- many1 (oneOf "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890_-")
+  string ("\t")
   _start <- natural haskell
   _end <- natural haskell
   _score <- float haskell

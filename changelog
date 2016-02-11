@@ -1,4 +1,6 @@
 -*-change-log-*-
+1.2.8 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 11. February 2016
+        * Fixed special character parsing of identifiers in RNAcode 
 1.2.7 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 4. January 2016
 	* Added RNAcode parser
 	* Added stackage yaml file
