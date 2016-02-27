@@ -14,7 +14,8 @@ import Text.ParserCombinators.Parsec
 -- | Parse the consenus of RNAz results         
 genParserRNAdistance :: GenParser Char st RNAdistance
 genParserRNAdistance = do
-  string ("f: ")              
+  oneOf "fhwcFHWCP"  
+  string (": ")              
   distance <- many1 (noneOf " ")
   optional (many1 space)
   eof
