@@ -74,7 +74,7 @@ rnadistanceresult :: RNAdistance
 rnadistanceresult = RNAdistance 96
 
 rnadistanceParseError :: ParseError
-rnadistanceParseError = addErrorMessage (Expect "\"f: \"") (newErrorMessage rnadistanceErrorMessage rnadistanceErrorSourcePosition)
+rnadistanceParseError = (newErrorMessage rnadistanceErrorMessage rnadistanceErrorSourcePosition)
 
 rnadistanceErrorMessage :: Message
 rnadistanceErrorMessage = SysUnExpect "\"i\""

@@ -44,9 +44,10 @@ genParseRNAcodeTabularHit = do
   string ("\t")
   _start <- natural haskell
   _end <- natural haskell
-  _score <- float haskell
+  _score <- many1 (oneOf "1234567890e.-+")
+  many space
   _pvalue <- float haskell
-  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) _score _pvalue 
+  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) (read _score ::Double) _pvalue 
 
 
 -- | Parse the input as RNAcode datatype
