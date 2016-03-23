@@ -1,4 +1,8 @@
 -*-change-log-*-
+1.2.9 Florian Eggenhofer <egg@informatik.uni-freiburg.de> 23. March 2016
+        * Fixed unexpected whitespaces in tabular RNAcode output
+	* Fixed a testing regression in RNAdistance test
+	* Added support for differnt distancetypes to RNAdistance parser
 1.2.8 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 11. February 2016
         * Fixed special character parsing of identifiers in RNAcode 
 1.2.7 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 4. January 2016
