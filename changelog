@@ -1,4 +1,6 @@
 -*-change-log-*-
+1.3.0 Florian Eggenhofer <egg@informatik.uni-freiburg.de> 6. September 2016
+        * Added support for new prefilter fields in RNAplex output 
 1.2.8 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 11. February 2016
         * Fixed special character parsing of identifiers in RNAcode 
 1.2.7 Florian Eggenhofer <florian.eggenhofer@univie.ac.at> 4. January 2016

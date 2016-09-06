@@ -56,8 +56,18 @@ parseRNAplexInteraction = do
   optional (many1 space)
   _targetAccessibility <- optionMaybe (try (many1 (noneOf (")"))))
   char ')'
+  many (oneOf " ")
+  optional (string "i:")
+  _prefilterStart <- optionMaybe (try (many1 digit))
+  optional (string ",")
+  optional (string "j:")
+  _prefilterEnd <- optionMaybe (try (many1 digit))
+  many (oneOf " ")
+  optional (string "<")
+  _prefilterEnergy <- optionMaybe (try (many1 (noneOf (">"))))
+  optional (string ">")
   newline
-  return $ RNAplexInteraction _targetIdentifier _queryIdentifier _secondaryStructure (readInt _targetDuplexBegin) (readInt _targetDuplexEnd) (readInt _queryDuplexBegin) (readInt _queryDuplexEnd) (readDouble _duplexEnergy) (liftM readDouble _duplexEnergyWithoutAccessiblity) (liftM readDouble _queryAccessiblity) (liftM readDouble _targetAccessibility)
+  return $ RNAplexInteraction _targetIdentifier _queryIdentifier _secondaryStructure (readInt _targetDuplexBegin) (readInt _targetDuplexEnd) (readInt _queryDuplexBegin) (readInt _queryDuplexEnd) (readDouble _duplexEnergy) (liftM readDouble _duplexEnergyWithoutAccessiblity) (liftM readDouble _queryAccessiblity) (liftM readDouble _targetAccessibility) (liftM readInt _prefilterStart) (liftM readInt _prefilterEnd) (liftM readDouble _prefilterEnergy) 
 
 -- | parse RNAplexOutput from input string
 parseRNAplex :: [Char] -> Either ParseError [RNAplexInteraction]

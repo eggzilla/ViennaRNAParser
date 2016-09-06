@@ -17,6 +17,9 @@ data RNAplexInteraction = RNAplexInteraction
     duplexEnergy :: Double,
     duplexEnergyWithoutAccessiblity :: Maybe Double,
     queryAccessiblity :: Maybe Double,
-    targetAccessibility :: Maybe Double
+    targetAccessibility :: Maybe Double,
+    prefilterStart ::  Maybe Int,
+    prefilterStop :: Maybe Int,
+    prefilterEnergy :: Maybe Double
   }
   deriving (Show, Eq)
