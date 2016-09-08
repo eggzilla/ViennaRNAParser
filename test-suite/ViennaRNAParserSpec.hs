@@ -116,7 +116,7 @@ rnaplexexample :: String
 rnaplexexample = ">1\n>0\n((((((((..(((((((((((((..((((((&)))))).)))))))))))))..))))))))  22,52  :  23,52  (-22.34 = -33.37 +  4.77 +  6.26)\n"
 
 rnaplexresult :: [RNAplexInteraction]
-rnaplexresult = [RNAplexInteraction "1" "0" "((((((((..(((((((((((((..((((((&)))))).)))))))))))))..))))))))" 22 52 23 52 (-22.34) (Just (-33.37)) (Just (4.77)) (Just 6.26)]
+rnaplexresult = [RNAplexInteraction "1" "0" "((((((((..(((((((((((((..((((((&)))))).)))))))))))))..))))))))" 22 52 23 52 (-22.34) (Just (-33.37)) (Just (4.77)) (Just 6.26) Nothing Nothing Nothing]
 
 rnaplexParseError :: ParseError
 rnaplexParseError = addErrorMessage (Expect "\">\"") (newErrorMessage rnaplexErrorMessage rnaplexErrorSourcePosition)
