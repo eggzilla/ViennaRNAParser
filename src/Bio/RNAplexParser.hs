@@ -9,7 +9,8 @@ module Bio.RNAplexParser (
 
 import Bio.RNAplexData
 import Bio.ViennaRNAParserLibrary
-import Text.ParserCombinators.Parsec    
+import Text.ParserCombinators.Parsec
+import Text.Parsec.Numbers
 import Control.Monad
 
 -- | Parse the input as list of RNAplexInteraction datatype
@@ -30,44 +31,44 @@ parseRNAplexInteraction = do
   newline 
   _secondaryStructure <- many1 (oneOf "&().,")
   many1 space
-  _targetDuplexBegin <- many1 digit
+  _targetDuplexBegin <- parseIntegral
   char ','
-  _targetDuplexEnd <- many1 digit
+  _targetDuplexEnd <- parseIntegral
   many1 space
   char ':'
   many1 space
-  _queryDuplexBegin <- many1 digit
+  _queryDuplexBegin <- parseIntegral
   char ','
-  _queryDuplexEnd <- many1 digit
+  _queryDuplexEnd <- parseIntegral
   many1 space
   char '('
-  optional space
-  _duplexEnergy <- many1 (noneOf (" )"))
-  optional space
+  optional (string " ")
+  _duplexEnergy <- parseFloat
+  optional (string " ")
   optional (char '=')
-  optional space
-  _duplexEnergyWithoutAccessiblity <- optionMaybe (try (many1 (noneOf (" )"))))
-  optional space 
+  optional (string " ")
+  _duplexEnergyWithoutAccessiblity <- optionMaybe (try parseFloat)
+  optional (string " ")
+  optional (char '+')
+  optional (many1 (string " "))
+  _queryAccessiblity <- optionMaybe (try parseFloat) 
+  optional (string " ")
   optional (char '+')
   optional (many1 space)
-  _queryAccessiblity <- optionMaybe (try (many1 (noneOf (" )")))) 
-  optional space 
-  optional (char '+')
-  optional (many1 space)
-  _targetAccessibility <- optionMaybe (try (many1 (noneOf (")"))))
+  _targetAccessibility <- optionMaybe (try parseFloat)
   char ')'
   many (oneOf " ")
   optional (string "i:")
-  _prefilterStart <- optionMaybe (try (many1 digit))
+  _prefilterStart <- optionMaybe (try parseIntegral)
   optional (string ",")
   optional (string "j:")
-  _prefilterEnd <- optionMaybe (try (many1 digit))
+  _prefilterEnd <- optionMaybe (try parseIntegral)
   many (oneOf " ")
   optional (string "<")
-  _prefilterEnergy <- optionMaybe (try (many1 (noneOf (">"))))
+  _prefilterEnergy <- optionMaybe (try parseFloat)
   optional (string ">")
   newline
-  return $ RNAplexInteraction _targetIdentifier _queryIdentifier _secondaryStructure (readInt _targetDuplexBegin) (readInt _targetDuplexEnd) (readInt _queryDuplexBegin) (readInt _queryDuplexEnd) (readDouble _duplexEnergy) (liftM readDouble _duplexEnergyWithoutAccessiblity) (liftM readDouble _queryAccessiblity) (liftM readDouble _targetAccessibility) (liftM readInt _prefilterStart) (liftM readInt _prefilterEnd) (liftM readDouble _prefilterEnergy) 
+  return $ RNAplexInteraction _targetIdentifier _queryIdentifier _secondaryStructure _targetDuplexBegin _targetDuplexEnd  _queryDuplexBegin  _queryDuplexEnd  _duplexEnergy _duplexEnergyWithoutAccessiblity _queryAccessiblity _targetAccessibility _prefilterStart _prefilterEnd _prefilterEnergy
 
 -- | parse RNAplexOutput from input string
 parseRNAplex :: [Char] -> Either ParseError [RNAplexInteraction]

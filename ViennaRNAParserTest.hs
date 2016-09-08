@@ -20,7 +20,9 @@ import Data.Either.Unwrap
 main = do
   args <- getArgs
   let input_file = (head args)
-  putStrLn "Test:"
-  parsedinput <-  readRNAcode input_file  
-  print parsedinput
+  parsedinput <-  readRNAplex input_file
+  let rightRNAz = fromRight parsedinput
+  --print rightRNAz
+  putStrLn (show $ duplexEnergyWithoutAccessiblity $ head rightRNAz)
+  --putStrLn (show $ structureConservationIndex $rightRNAz)
 

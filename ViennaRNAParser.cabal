@@ -58,7 +58,7 @@ library
   ghc-options:         -Wall -O2 -fno-warn-unused-do-bind
 
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.5 && <5, parsec>=3.1.9, process, transformers
+  build-depends:       base >=4.5 && <5, parsec>=3.1.9, process, transformers, ParsecTools
   
   -- Directories containing source files.
   hs-source-dirs:      src

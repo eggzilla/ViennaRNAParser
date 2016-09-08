@@ -4,5 +4,5 @@ packages:
 compiler-check: newer-minor
 extra-deps:
 - either-unwrap-1.1
-- ViennaRNAParser-1.2.6
-resolver: lts-3.20
+- ParsecTools-0.0.2.0
+resolver: lts-3.22
