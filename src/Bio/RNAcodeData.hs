@@ -22,8 +22,9 @@ data RNAcode = RNAcode
 data RNAcodeHit = RNAcodeHit
   { 
     hss :: Int,
-    frame :: Double,
-    length :: Int,
+    strand :: Char,
+    frame :: Int,
+    hitLength :: Int,
     from :: Int,
     to :: Int,
     name :: String,

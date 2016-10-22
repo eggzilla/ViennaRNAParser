@@ -19,6 +19,7 @@ import Text.Parsec.Token
 import qualified Control.Exception.Base as CE
 import Text.Parsec.Language (haskell)
 import Control.Applicative ((<*>),(<$>),(<$),pure)
+import Text.Parsec.Numbers    
 
 -- | Run external RNAcode command and read the output into the corresponding datatype
 systemRNAcode :: String -> String -> String -> IO ExitCode
@@ -33,21 +34,29 @@ genParseRNAcodeTabular = do
 -- | Parse the input as RNAcodeHit
 genParseRNAcodeTabularHit :: GenParser Char st RNAcodeHit
 genParseRNAcodeTabularHit = do
-  _hss <- natural haskell
-  _frame <- integer haskell
-  _length <- natural haskell
-  _from <- natural haskell
-  _to <- natural haskell
-  _name <- identifier haskell
-  --_name <- identifier haskell
+  _hss <- parseIntegral
+  tab
+  _strand <- oneOf "+-"
+  tab
+  _frame <- parseIntegral
+  tab          
+  _length <- parseIntegral
+  tab
+  _from <- parseIntegral
+  tab         
+  _to <-parseIntegral
+  tab
   _name <- many1 (oneOf "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890_-")
-  string ("\t")
-  _start <- natural haskell
-  _end <- natural haskell
-  _score <- many1 (oneOf "1234567890e.-+")
-  many space
-  _pvalue <- float haskell
-  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) (read _score ::Double) _pvalue 
+  tab
+  _start <- parseIntegral
+  tab          
+  _end <- parseIntegral
+  tab        
+  _score <- parseFloat
+  tab          
+  _pvalue <- parseFloat
+  newline
+  return $ RNAcodeHit  _hss _strand _frame _length _from _to _name _start _end _score _pvalue 
 
 
 -- | Parse the input as RNAcode datatype
@@ -82,20 +91,29 @@ genParseRNAcode = do
 genParseRNAcodeHit :: GenParser Char st RNAcodeHit
 genParseRNAcodeHit = do
   many (char ' ')
-  _hss <- natural haskell
-  _frame <- integer haskell
-  _length <- natural haskell
-  _from <- natural haskell
-  _to <- natural haskell
-  --_name <- identifier haskell
+  _hss <- parseIntegral
+  tab
+  _strand <- oneOf "+-"        
+  tab
+  _frame <- parseIntegral
+  tab
+  _length <- parseIntegral
+  tab
+  _from <- parseIntegral
+  tab
+  _to <- parseIntegral
+  tab
   _name <- many1 (oneOf "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890_-")
-  string ("\t")
-  _start <- natural haskell
-  _end <- natural haskell
-  _score <- float haskell
-  _pvalue <- many1 (try (choice [digit,char '.']))
+  tab
+  _start <- parseIntegral
+  tab
+  _end <- parseIntegral
+  tab        
+  _score <- parseFloat
+  tab          
+  _pvalue <- parseFloat
   newline
-  return $ RNAcodeHit (fromInteger _hss) (fromInteger _frame) (fromInteger _length) (fromInteger _from) (fromInteger _to) _name (fromInteger _start) (fromInteger _end) _score (read _pvalue :: Double)
+  return $ RNAcodeHit  _hss _strand _frame _length _from _to _name _start _end _score _pvalue 
 
 -- | parse RNAcode from input string
 parseRNAcode :: String -> Either ParseError RNAcode
@@ -109,7 +127,7 @@ readRNAcode filePath = do
 
 -- | parse RNAcode from input string
 parseRNAcodeTabular :: String -> Either ParseError RNAcode
-parseRNAcodeTabular = parse genParseRNAcodeTabular "parseRNAcode" 
+parseRNAcodeTabular = parse genParseRNAcodeTabular "parseRNAcodeTabular" 
 
 -- | parse RNAcode from input filePath                      
 readRNAcodeTabular :: String -> IO (Either ParseError RNAcode)                  
