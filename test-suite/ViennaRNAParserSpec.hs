@@ -16,6 +16,13 @@ spec = do
     context "Parsing invalid input" $ do
       it "Returns ParseError" $ do
         (parseRNAalifold "invalid input") `shouldBe` Left rnaalifoldParseError
+  describe "RNAcodeTabularParser" $ do
+    context "Parsing RNAcode tabular input" $ do
+      it "Returns RNAcode type" $ do
+        (parseRNAcodeTabular rnaCodeTabularExample) `shouldBe` Right rnaCodeTabularResult
+    --context "Parsing invalid input" $ do
+    --  it "Returns ParseError" $ do
+    --    (parseRNAcodeTabular "invalid input") `shouldBe` Left rnaCodeTabularParseError         
   describe "RNAcofoldParser" $ do
     context "Parsing RNAcofold input" $ do
       it "Returns RNAcofold type" $ do
@@ -82,6 +89,24 @@ rnadistanceErrorMessage = SysUnExpect "\"i\""
 rnadistanceErrorSourcePosition :: SourcePos
 rnadistanceErrorSourcePosition = newPos "genParseRNAdistance" 1 1
 
+--
+rnaCodeTabularExample :: String
+rnaCodeTabularExample = "0\t-\t2\t21\t1\t21\tseqJB\t2\t64\t2.871\t0.998\n1\t+\t2\t17\t5\t21\tseqJB\t14\t64\t2.452\t1.000\n2\t-\t3\t9\t13\t21\tseqJB\t39\t65\t1.949\t1.000\n3\t+\t1\t11\t12\t22\tseqJB\t34\t66\t1.890\t1.000\n"
+
+rnaCodeTabularResult :: RNAcode
+rnaCodeTabularResult = RNAcode {rnacodeHits = [RNAcodeHit {hss = 0, strand = '-', frame = 2, hitLength = 21, from = 1, to = 21, name = "seqJB", start = 2, end = 64, score = 2.871, pvalue = 0.998},RNAcodeHit {hss = 1, strand = '+', frame = 2, hitLength = 17, from = 5, to = 21, name = "seqJB", start = 14, end = 64, score = 2.452, pvalue = 1.0},RNAcodeHit {hss = 2, strand = '-', frame = 3, hitLength = 9, from = 13, to = 21, name = "seqJB", start = 39, end = 65, score = 1.949, pvalue = 1.0},RNAcodeHit {hss = 3, strand = '+', frame = 1, hitLength = 11, from = 12, to = 22, name = "seqJB", start = 34, end = 66, score = 1.89, pvalue = 1.0}], rcAlignmentNumber = Nothing, rcTime = Nothing, rcSampleNumber = Nothing, rcDelta = Nothing, rcBigOmega = Nothing, rcSmallOmega = Nothing, rcStopPenalty = Nothing}
+
+
+rnaCodeTabularParseError :: ParseError
+rnaCodeTabularParseError = addErrorMessage (Expect "\"+\", \"-\" or digit\n") (newErrorMessage rnaCodeTabularErrorMessage rnaCodeTabularErrorSourcePosition)
+
+rnaCodeTabularErrorMessage :: Message
+rnaCodeTabularErrorMessage = SysUnExpect "\"i\""
+
+rnaCodeTabularErrorSourcePosition :: SourcePos
+rnaCodeTabularErrorSourcePosition = newPos "parseRNAcodeTabular" 1 1
+
+--
 rnacofoldexample :: String
 rnacofoldexample = "ccccauccccacccccaagcgagcaccugccccucc&cgggggcggagcuccggcgcauca\n..................((((((..((((((((..&.)))))))).))))..))...... (-22.50)"
 
