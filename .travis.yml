@@ -1,4 +1,4 @@
-opied as is from https://www.fpcomplete.com/blog/2016/02/updated-haskell-travis-config 
+#Copied as is from https://www.fpcomplete.com/blog/2016/02/updated-haskell-travis-config 
 #Copy these contents into the root directory of your Github project in a file
 # named .travis.yml
 
