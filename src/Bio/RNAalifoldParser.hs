@@ -17,7 +17,7 @@ import qualified Control.Exception.Base as CE
 
 --- | Run external RNAalifold command and read the output into the corresponding datatype
 systemRNAalifold :: String -> String -> String -> IO ExitCode
-systemRNAalifold options inputFilePath outputFilePath = system ("RNAalifold " ++ options  ++ " < " ++ inputFilePath  ++ " > " ++ outputFilePath)
+systemRNAalifold options inputFilePath outputFilePath = system ("RNAalifold " ++ options  ++ " " ++ inputFilePath  ++ " > " ++ outputFilePath)
 
 -- | Parse the consenus of RNAz results         
 genParserRNAalifold :: GenParser Char st RNAalifold
