@@ -12,7 +12,7 @@ description:         Currently contains parsers and datatypes for: RNAalifold, R
 		     For more information on the ViennaRNA package refer to <http://www.tbi.univie.ac.at/RNA/>.
 		     .
 		     The libary is tested with Version 2.3.2 of the ViennaRNA package.                      
-license:             GPL
+license:             GPL-3.0
 license-file:        LICENSE
 author:              Florian Eggenhofer
 maintainer:          florian.eggenhofer@univie.ac.at
