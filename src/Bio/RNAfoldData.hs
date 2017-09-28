@@ -11,3 +11,22 @@ data RNAfold = RNAfold
     foldingEnergy :: Double
   }
   deriving (Show, Eq)
+
+data RNAfoldMEA = RNAfoldMEA
+  { 
+    meaSequenceIdentifier :: String,
+    meaFoldSequence :: String,
+    mfeStructure :: String,
+    mfefoldingEnergy :: Double,
+    coarseStructure :: String,
+    coarseFoldingEnergy :: Double,
+    centroidStructure :: String,
+    centroidFoldingEnergy :: Double,
+    centroidDistance :: Double,
+    meaStructure :: String,
+    meaFoldingEnergy :: Double,
+    meaDistance :: Double,
+    mfeFreq :: Double,
+    ensembleDiversity :: Double
+  }
+  deriving (Show, Eq)
